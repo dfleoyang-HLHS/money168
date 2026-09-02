@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0e14;
+  --surface: #0f1419;
+  --raised: #1a2332;
+  --border: #2d3a4f;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .card {
+    @apply rounded-xl border border-surface-border bg-surface-raised p-5 shadow-lg;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+/* Recharts */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #2d3a4f;
+}
+
+.recharts-text {
+  fill: #94a3b8;
+  font-size: 11px;
+}

@@ -1,0 +1,100 @@
+{
+  "indicators": [
+    {
+      "id": "us10y",
+      "name": { "en": "US 10Y Treasury Yield", "zh": "美國10年期公債殖利率" },
+      "category": "macro_rates",
+      "categoryLabel": { "en": "Macro Rates", "zh": "宏觀利率" },
+      "unit": "%",
+      "source": "FRED",
+      "sourceSeriesId": "DGS10",
+      "dataFile": "data/series/us10y.json",
+      "updateFrequency": "daily",
+      "description": {
+        "zh": "反映長期利率與通膨預期，影響股票估值折現率。",
+        "en": "Reflects long-term rates and inflation expectations."
+      },
+      "detailConfig": { "defaultRange": "1Y", "chartType": "line" }
+    },
+    {
+      "id": "vix",
+      "name": { "en": "VIX Volatility Index", "zh": "VIX 恐慌指數" },
+      "category": "risk_sentiment",
+      "categoryLabel": { "en": "Risk Sentiment", "zh": "風險情緒" },
+      "unit": "index",
+      "source": "FRED",
+      "sourceSeriesId": "VIXCLS",
+      "dataFile": "data/series/vix.json",
+      "updateFrequency": "daily",
+      "description": {
+        "zh": "衡量市場對未來 30 天波動的預期，越高代表恐慌情緒越強。",
+        "en": "Measures expected 30-day market volatility."
+      },
+      "detailConfig": { "defaultRange": "1Y", "chartType": "line" }
+    },
+    {
+      "id": "sp500",
+      "name": { "en": "S&P 500 Index", "zh": "標普500指數" },
+      "category": "equity",
+      "categoryLabel": { "en": "Equity", "zh": "股市" },
+      "unit": "index",
+      "source": "FRED",
+      "sourceSeriesId": "SP500",
+      "dataFile": "data/series/sp500.json",
+      "updateFrequency": "daily",
+      "description": {
+        "zh": "美國大型股代表性指數，週期判斷的核心參考。",
+        "en": "Benchmark US large-cap equity index."
+      },
+      "detailConfig": { "defaultRange": "5Y", "chartType": "line" }
+    },
+    {
+      "id": "cpi",
+      "name": { "en": "CPI (YoY)", "zh": "消費者物價指數（年增）" },
+      "category": "inflation",
+      "categoryLabel": { "en": "Inflation", "zh": "通膨" },
+      "unit": "%",
+      "source": "FRED",
+      "sourceSeriesId": "CPIAUCSL",
+      "dataFile": "data/series/cpi.json",
+      "updateFrequency": "monthly",
+      "description": {
+        "zh": "奧本海默框架兩大關鍵指標之一，影響貨幣政策與估值。",
+        "en": "Key Oppenheimer framework indicator for inflation and policy."
+      },
+      "detailConfig": { "defaultRange": "5Y", "chartType": "line" }
+    },
+    {
+      "id": "ism",
+      "name": { "en": "ISM Manufacturing PMI", "zh": "ISM 製造業 PMI" },
+      "category": "manufacturing",
+      "categoryLabel": { "en": "Manufacturing", "zh": "製造業" },
+      "unit": "index",
+      "source": "ISM (DBnomics + Bellwether)",
+      "sourceUrl": "https://db.nomics.world/ISM/pmi",
+      "dataFile": "data/series/ism.json",
+      "updateFrequency": "monthly",
+      "description": {
+        "zh": "奧本海默框架兩大關鍵指標之一，50 為擴張/收縮分界線。",
+        "en": "Key Oppenheimer framework indicator; 50 is expansion/contraction line."
+      },
+      "detailConfig": { "defaultRange": "3Y", "chartType": "line" }
+    },
+    {
+      "id": "unemployment",
+      "name": { "en": "US Unemployment Rate", "zh": "美國失業率" },
+      "category": "labor",
+      "categoryLabel": { "en": "Labor Market", "zh": "勞動市場" },
+      "unit": "%",
+      "source": "FRED",
+      "sourceSeriesId": "UNRATE",
+      "dataFile": "data/series/unemployment.json",
+      "updateFrequency": "monthly",
+      "description": {
+        "zh": "週期末端風險指標：低失業後若回升，熊市風險上升。",
+        "en": "Late-cycle risk indicator per Oppenheimer."
+      },
+      "detailConfig": { "defaultRange": "5Y", "chartType": "line" }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T02:55:00.030Z",
+  "updatedAt": "2026-09-02T09:25:24.124Z",
   "ruleSetId": "oppenheimer_cycle_v1",
   "estimatedPhase": {
     "id": "growth",
@@ -39,17 +39,17 @@
     "ism.latest.value": 53.3,
     "ism_momentum_1m": -0.7000000000000028,
     "ism_momentum_3m": 0.5999999999999943,
-    "cpi_yoy": 2.2150154045727177,
-    "cpi_momentum_3m": -0.25827501918656015,
+    "cpi_yoy": 3.5397514271936714,
+    "cpi_momentum_3m": -0.407275481510605,
     "pe_percentile_10y": 50,
     "eps_growth_yoy": 3.992334717342705,
     "eps_growth_trend": 1,
-    "return_6m": 0.08722080663876786,
-    "return_12m": 0.1608077533515686,
-    "drawdown_from_peak": 0,
-    "unemployment_level": 3.79,
+    "return_6m": -0.0027950334907471674,
+    "return_12m": -0.0198169478637924,
+    "drawdown_from_peak": -0.021479704423264967,
+    "unemployment_level": 4.1,
     "unemployment_rising_from_low": false,
-    "spread_10y_3m": 1.39,
+    "spread_10y_3m": 0.87,
     "curve_inverted": false
   },
   "crossMatrix": {

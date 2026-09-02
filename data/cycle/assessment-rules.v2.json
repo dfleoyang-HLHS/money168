@@ -1,0 +1,724 @@
+{
+  "$schema": "./assessment-rules.schema.json",
+  "version": "2.0.0",
+  "ruleSetId": "oppenheimer_cycle_v2",
+  "updatedAt": "2026-09-02T09:40:00Z",
+  "description": {
+    "zh": "第二版週期判斷規則：納入 ISM 二階變化（加速度），強化動能轉折判斷。",
+    "en": "Version 2 cycle assessment rules: incorporates ISM second derivative (acceleration) for momentum inflection."
+  },
+  "inputs": {
+    "required": [
+      {
+        "id": "ism",
+        "path": "series/ism.json",
+        "fields": ["latest", "history"],
+        "derived": ["ism_momentum_3m", "ism_momentum_1m", "ism_momentum_1m_prev", "ism_acceleration", "ism_level_bucket"]
+      },
+      {
+        "id": "cpi",
+        "path": "series/cpi.json",
+        "fields": ["latest", "history"],
+        "derived": ["cpi_yoy", "cpi_momentum_3m", "cpi_level_bucket"]
+      }
+    ],
+    "optional": [
+      {
+        "id": "sp500_pe",
+        "path": "series/sp500_pe.json",
+        "derived": ["pe_percentile_10y"]
+      },
+      {
+        "id": "sp500_eps_growth",
+        "path": "series/sp500_eps.json",
+        "derived": ["eps_growth_yoy", "eps_growth_trend"]
+      },
+      {
+        "id": "sp500_return",
+        "path": "series/sp500.json",
+        "derived": ["return_12m", "return_6m", "drawdown_from_peak"]
+      },
+      {
+        "id": "unemployment",
+        "path": "series/unemployment.json",
+        "derived": ["unemployment_level", "unemployment_rising_from_low"]
+      },
+      {
+        "id": "yield_curve",
+        "path": "series/yield_curve.json",
+        "derived": ["spread_10y_3m", "curve_inverted"]
+      }
+    ]
+  },
+  "derivedMetrics": {
+    "ism_momentum_3m": {
+      "formula": "latest.value - value_3_months_ago",
+      "description": "ISM 3 個月變化"
+    },
+    "ism_momentum_1m": {
+      "formula": "latest.value - value_1_month_ago",
+      "description": "ISM 1 個月變化（一階動能）"
+    },
+    "ism_momentum_1m_prev": {
+      "formula": "value_1_month_ago - value_2_months_ago",
+      "description": "前一期的 ISM 1 個月變化"
+    },
+    "ism_acceleration": {
+      "formula": "ism_momentum_1m - ism_momentum_1m_prev",
+      "description": "ISM 二階變化（動能加速度）"
+    },
+    "ism_level_bucket": {
+      "buckets": [
+        { "id": "deep_contraction", "max": 47 },
+        { "id": "contraction", "min": 47, "max": 50 },
+        { "id": "neutral", "min": 50, "max": 52 },
+        { "id": "expansion", "min": 52, "max": 55 },
+        { "id": "strong_expansion", "min": 55 }
+      ]
+    },
+    "cpi_yoy": {
+      "formula": "(latest.value / value_12_months_ago - 1) * 100",
+      "description": "CPI 年增率（%）"
+    },
+    "cpi_momentum_3m": {
+      "formula": "cpi_yoy_latest - cpi_yoy_3_months_ago",
+      "description": "CPI 年增率 3 個月變化（百分點）"
+    },
+    "cpi_level_bucket": {
+      "buckets": [
+        { "id": "very_low", "max": 1.5 },
+        { "id": "low", "min": 1.5, "max": 2.5 },
+        { "id": "moderate", "min": 2.5, "max": 3.5 },
+        { "id": "elevated", "min": 3.5, "max": 5.0 },
+        { "id": "high", "min": 5.0 }
+      ]
+    },
+    "pe_percentile_10y": {
+      "formula": "percentile_rank(current_pe, pe_history_10y)",
+      "description": "本益比近 10 年分位"
+    },
+    "eps_growth_yoy": {
+      "formula": "(latest_eps / eps_12m_ago - 1) * 100",
+      "description": "EPS 年增率（%）"
+    },
+    "eps_growth_trend": {
+      "formula": "sign(eps_growth_yoy - eps_growth_yoy_6m_ago)",
+      "description": "EPS 成長趨勢：1=改善, 0=持平, -1=惡化"
+    },
+    "return_12m": {
+      "formula": "(price_latest / price_12m_ago - 1)",
+      "description": "近 12 個月報酬"
+    },
+    "return_6m": {
+      "formula": "(price_latest / price_6m_ago - 1)",
+      "description": "近 6 個月報酬"
+    },
+    "drawdown_from_peak": {
+      "formula": "(price_latest / rolling_peak_24m - 1)",
+      "description": "距 24 個月高點回撤"
+    },
+    "unemployment_rising_from_low": {
+      "formula": "unemployment_level < 4.5 AND unemployment_3m_change > 0.2",
+      "description": "失業率由低位回升"
+    },
+    "curve_inverted": {
+      "formula": "spread_10y_3m < 0",
+      "description": "收益率曲線倒掛"
+    }
+  },
+  "scoring": {
+    "method": "weighted_sum",
+    "initialScores": {
+      "despair": 0,
+      "hope": 0,
+      "growth": 0,
+      "optimism": 0
+    },
+    "rules": [
+      {
+        "id": "R01_ism_inflecting_from_low",
+        "name": { "zh": "ISM 低位回升", "en": "ISM inflecting up from low" },
+        "priority": 100,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "ism_momentum_1m", "gte": 0 }
+          ]
+        },
+        "scores": { "hope": 35, "growth": 10 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "ISM 低於 50 但動能回升，符合書中『疲弱但改善』的希望期特徵。",
+          "en": "ISM below 50 with improving momentum; classic hope-phase setup."
+        }
+      },
+      {
+        "id": "R02_ism_low_and_falling",
+        "name": { "zh": "ISM 低位且惡化", "en": "ISM low and deteriorating" },
+        "priority": 100,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_3m", "lt": 0 }
+          ]
+        },
+        "scores": { "despair": 30, "hope": 5 },
+        "signal": "bearish",
+        "interpretation": {
+          "zh": "ISM 低且續降，報酬風險偏高，較接近絕望期。",
+          "en": "ISM low and falling; higher despair risk."
+        }
+      },
+      {
+        "id": "R03_ism_expansion_accelerating",
+        "name": { "zh": "ISM 擴張且加速", "en": "ISM expansion accelerating" },
+        "priority": 92,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 50 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "ism_momentum_1m", "gt": 0 },
+            { "metric": "ism_acceleration", "gt": 0 }
+          ]
+        },
+        "scores": { "growth": 35, "hope": 5 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "製造業擴張且短中期動能同步向上、加速度為正，偏向成長期。",
+          "en": "Expanding ISM with positive 1m/3m momentum and positive acceleration; growth-phase bias."
+        }
+      },
+      {
+        "id": "R03b_ism_expansion_improving",
+        "name": { "zh": "ISM 擴張但動能放緩", "en": "ISM expansion with fading momentum" },
+        "priority": 90,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 50 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "ism_momentum_1m", "gte": 0 },
+            { "metric": "ism_acceleration", "lte": 0 }
+          ]
+        },
+        "scores": { "growth": 22, "hope": 15 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "仍處擴張區但動能放緩（二階變化轉弱），成長力道減弱、偏向希望期過渡。",
+          "en": "Still expanding but momentum decelerating; weaker growth, hope-transition bias."
+        }
+      },
+      {
+        "id": "R22_ism_expansion_short_term_pullback",
+        "name": { "zh": "ISM 擴張但短期回落", "en": "ISM expansion with short-term pullback" },
+        "priority": 89,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 50 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "ism_momentum_1m", "lt": 0 }
+          ]
+        },
+        "scores": { "growth": 12, "hope": 22 },
+        "signal": "transition",
+        "interpretation": {
+          "zh": "水準仍在擴張區，但近月動能轉負，常見於成長期向希望期過渡。",
+          "en": "Level still expanding but 1m momentum negative; growth-to-hope transition pattern."
+        }
+      },
+      {
+        "id": "R04_ism_high_and_rolling_over",
+        "name": { "zh": "ISM 高位回落", "en": "ISM high and rolling over" },
+        "priority": 90,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 55 },
+            { "metric": "ism_momentum_3m", "lt": 0 }
+          ]
+        },
+        "scores": { "optimism": 25, "growth": 5 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "ISM 處高位但轉弱，常見於周期後段。",
+          "en": "High but fading ISM; late-cycle warning."
+        }
+      },
+      {
+        "id": "R05_cpi_disinflation",
+        "name": { "zh": "通膨回落", "en": "Disinflation" },
+        "priority": 80,
+        "when": {
+          "all": [
+            { "metric": "cpi_momentum_3m", "lt": -0.2 }
+          ]
+        },
+        "scores": { "hope": 15, "growth": 10 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "通膨趨勢回落，有利政策轉向與估值修復。",
+          "en": "Disinflation supports policy pivot and valuation repair."
+        }
+      },
+      {
+        "id": "R06_cpi_reacceleration",
+        "name": { "zh": "通膨再加速", "en": "Inflation reacceleration" },
+        "priority": 80,
+        "when": {
+          "all": [
+            { "metric": "cpi_momentum_3m", "gt": 0.3 },
+            { "metric": "cpi_yoy", "gte": 3.5 }
+          ]
+        },
+        "scores": { "despair": 10, "optimism": 10 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "通膨黏性上升，提高緊縮與波動風險。",
+          "en": "Sticky/reaccelerating inflation raises tightening risk."
+        }
+      },
+      {
+        "id": "R07_cpi_elevated",
+        "name": { "zh": "高通膨水準", "en": "Elevated inflation level" },
+        "priority": 70,
+        "when": {
+          "all": [
+            { "metric": "cpi_yoy", "gte": 4.0 }
+          ]
+        },
+        "scores": { "despair": 15, "optimism": 5 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "通膨偏高，歷史上常伴隨政策緊縮與估值壓力。",
+          "en": "Elevated inflation historically coincides with tightening and valuation pressure."
+        }
+      },
+      {
+        "id": "R08_deep_market_drawdown",
+        "name": { "zh": "深度回撤", "en": "Deep market drawdown" },
+        "priority": 95,
+        "when": {
+          "all": [
+            { "metric": "drawdown_from_peak", "lte": -0.20 }
+          ]
+        },
+        "scores": { "despair": 35, "hope": 15 },
+        "signal": "transition",
+        "interpretation": {
+          "zh": "市場自高點回撤超過 20%，可能處於或接近絕望期。",
+          "en": "Drawdown >20% from peak; despair or early hope transition."
+        }
+      },
+      {
+        "id": "R09_strong_recent_rebound",
+        "name": { "zh": "強勁近期反彈", "en": "Strong recent rebound" },
+        "priority": 85,
+        "when": {
+          "all": [
+            { "metric": "return_6m", "gte": 0.15 },
+            { "metric": "drawdown_from_peak", "gt": -0.15 }
+          ]
+        },
+        "scores": { "hope": 20, "optimism": 10 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "短期強勁反彈，可能反映希望期或樂觀期動能。",
+          "en": "Strong rebound may reflect hope or optimism momentum."
+        }
+      },
+      {
+        "id": "R10_pe_very_high",
+        "name": { "zh": "估值偏高", "en": "Elevated valuation" },
+        "priority": 75,
+        "when": {
+          "all": [
+            { "metric": "pe_percentile_10y", "gte": 80 }
+          ]
+        },
+        "scores": { "optimism": 25, "growth": -5 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "本益比處近 10 年高位，偏向樂觀期但前瞻報酬下降。",
+          "en": "High valuation percentile; optimism bias with lower forward returns."
+        }
+      },
+      {
+        "id": "R11_pe_compressed",
+        "name": { "zh": "估值壓縮", "en": "Compressed valuation" },
+        "priority": 75,
+        "when": {
+          "all": [
+            { "metric": "pe_percentile_10y", "lte": 30 }
+          ]
+        },
+        "scores": { "despair": 20, "hope": 15 },
+        "signal": "transition",
+        "interpretation": {
+          "zh": "估值處低位，常見於絕望期末或希望期初。",
+          "en": "Compressed valuation; late despair or early hope."
+        }
+      },
+      {
+        "id": "R12_eps_strong_growth",
+        "name": { "zh": "盈餘強勁成長", "en": "Strong EPS growth" },
+        "priority": 85,
+        "when": {
+          "all": [
+            { "metric": "eps_growth_yoy", "gte": 5 }
+          ]
+        },
+        "scores": { "growth": 30, "optimism": 5 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "盈餘實際成長，支持成長期判斷。",
+          "en": "Solid earnings growth supports growth phase."
+        }
+      },
+      {
+        "id": "R13_eps_growth_slowing",
+        "name": { "zh": "盈餘成長放緩", "en": "Slowing EPS growth" },
+        "priority": 80,
+        "when": {
+          "all": [
+            { "metric": "eps_growth_yoy", "lt": 5 },
+            { "metric": "eps_growth_trend", "eq": -1 }
+          ]
+        },
+        "scores": { "optimism": 20, "growth": 5 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "盈餘仍正成長但趨勢放緩，常見於樂觀期。",
+          "en": "Positive but slowing earnings; optimism-phase pattern."
+        }
+      },
+      {
+        "id": "R14_eps_negative",
+        "name": { "zh": "盈餘負成長", "en": "Negative EPS growth" },
+        "priority": 85,
+        "when": {
+          "all": [
+            { "metric": "eps_growth_yoy", "lt": 0 }
+          ]
+        },
+        "scores": { "despair": 20, "hope": 10 },
+        "signal": "bearish",
+        "interpretation": {
+          "zh": "盈餘下滑；若其他訊號改善，仍可能處於希望期。",
+          "en": "Falling earnings; hope still possible if other signals improve."
+        }
+      },
+      {
+        "id": "R15_unemployment_rising_from_low",
+        "name": { "zh": "失業率由低位回升", "en": "Unemployment rising from lows" },
+        "priority": 70,
+        "when": {
+          "all": [
+            { "metric": "unemployment_rising_from_low", "eq": true }
+          ]
+        },
+        "scores": { "optimism": 15, "despair": 10 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "書中提及：低失業 + 高估值後若失業回升，熊市風險上升。",
+          "en": "Book warning: rising unemployment from lows raises bear market risk."
+        }
+      },
+      {
+        "id": "R16_yield_curve_inverted",
+        "name": { "zh": "收益率曲線倒掛", "en": "Inverted yield curve" },
+        "priority": 65,
+        "when": {
+          "all": [
+            { "metric": "curve_inverted", "eq": true }
+          ]
+        },
+        "scores": { "optimism": 10, "despair": 15 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "曲線倒掛常領先衰退風險，提高絕望期機率。",
+          "en": "Inverted curve raises recession and despair risk."
+        }
+      },
+      {
+        "id": "R17_hope_transition_combo",
+        "name": { "zh": "希望期組合訊號", "en": "Hope transition combo" },
+        "priority": 110,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "eps_growth_yoy", "lt": 3 },
+            { "metric": "return_6m", "gte": 0.08 }
+          ]
+        },
+        "scores": { "hope": 25 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "宏觀仍弱但改善、盈餘未強、市場已反彈——典型希望期。",
+          "en": "Weak-but-improving macro, weak earnings, market rebound: classic hope."
+        }
+      },
+      {
+        "id": "R18_growth_combo",
+        "name": { "zh": "成長期組合訊號", "en": "Growth combo" },
+        "priority": 110,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 50 },
+            { "metric": "eps_growth_yoy", "gte": 5 },
+            { "metric": "pe_percentile_10y", "lt": 75 }
+          ]
+        },
+        "scores": { "growth": 25 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "擴張宏觀 + 實際盈餘成長 + 估值未過熱，偏向成長期。",
+          "en": "Expanding macro, real earnings growth, non-extreme valuation: growth phase."
+        }
+      },
+      {
+        "id": "R19_optimism_combo",
+        "name": { "zh": "樂觀期組合訊號", "en": "Optimism combo" },
+        "priority": 110,
+        "when": {
+          "all": [
+            { "metric": "pe_percentile_10y", "gte": 75 },
+            { "metric": "eps_growth_trend", "eq": -1 },
+            { "metric": "return_12m", "gte": 0.10 }
+          ]
+        },
+        "scores": { "optimism": 30 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "高估值、盈餘放緩但市場仍強，偏向樂觀期。",
+          "en": "High valuation, slowing earnings, strong market: optimism phase."
+        }
+      },
+      {
+        "id": "R23_ism_inflection_up",
+        "name": { "zh": "ISM 動能向上轉折", "en": "ISM momentum inflecting up" },
+        "priority": 95,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_1m", "gt": 0 },
+            { "metric": "ism_momentum_3m", "lte": 0 },
+            { "metric": "ism_acceleration", "gt": 0 }
+          ]
+        },
+        "scores": { "hope": 30, "growth": 10 },
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "ISM 仍低於 50，但近月動能轉正且加速度向上，典型希望期轉折訊號。",
+          "en": "ISM below 50 with positive 1m momentum and acceleration; hope-phase inflection."
+        }
+      },
+      {
+        "id": "R24_ism_inflection_down",
+        "name": { "zh": "ISM 動能向下轉折", "en": "ISM momentum inflecting down" },
+        "priority": 94,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "gte": 50 },
+            { "metric": "ism_momentum_1m", "lt": 0 },
+            { "metric": "ism_momentum_3m", "gt": 0 },
+            { "metric": "ism_acceleration", "lt": 0 }
+          ]
+        },
+        "scores": { "optimism": 15, "growth": 8, "hope": 10 },
+        "signal": "caution",
+        "interpretation": {
+          "zh": "ISM 仍在擴張區，但動能轉弱且加速度為負，偏向樂觀/成長後段。",
+          "en": "ISM still expanding but momentum inflecting down; late growth/optimism warning."
+        }
+      },
+      {
+        "id": "R25_ism_contraction_accelerating",
+        "name": { "zh": "ISM 收縮加速", "en": "ISM contraction accelerating" },
+        "priority": 88,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_3m", "lt": 0 },
+            { "metric": "ism_momentum_1m", "lt": 0 },
+            { "metric": "ism_acceleration", "lt": 0 }
+          ]
+        },
+        "scores": { "despair": 25, "hope": 5 },
+        "signal": "bearish",
+        "interpretation": {
+          "zh": "ISM 收縮且動能持續惡化（二階變化為負），偏向絕望期。",
+          "en": "Contracting ISM with worsening momentum; despair-phase bias."
+        }
+      },
+      {
+        "id": "R26_ism_contraction_decelerating",
+        "name": { "zh": "ISM 收縮放緩", "en": "ISM contraction decelerating" },
+        "priority": 87,
+        "when": {
+          "all": [
+            { "metric": "ism.latest.value", "lt": 50 },
+            { "metric": "ism_momentum_3m", "lt": 0 },
+            { "metric": "ism_momentum_1m", "lt": 0 },
+            { "metric": "ism_acceleration", "gt": 0 }
+          ]
+        },
+        "scores": { "despair": 12, "hope": 20 },
+        "signal": "transition",
+        "interpretation": {
+          "zh": "ISM 仍處收縮，但下跌速度放緩（二階變化轉正），可能接近希望期底部。",
+          "en": "Still contracting but decelerating; potential hope-phase bottoming."
+        }
+      },
+      {
+        "id": "R20_despair_combo",
+        "name": { "zh": "絕望期組合訊號", "en": "Despair combo" },
+        "priority": 110,
+        "when": {
+          "all": [
+            { "metric": "return_12m", "lte": -0.15 },
+            { "metric": "ism_momentum_3m", "lt": 0 },
+            { "metric": "eps_growth_yoy", "lt": 0 }
+          ]
+        },
+        "scores": { "despair": 30 },
+        "signal": "bearish",
+        "interpretation": {
+          "zh": "報酬差、宏觀惡化、盈餘下滑同時出現，偏向絕望期。",
+          "en": "Poor returns, deteriorating macro, falling earnings: despair bias."
+        }
+      }
+    ]
+  },
+  "crossMatrixBonus": {
+    "description": "ISM x CPI 交叉矩陣加分（ISM 軸改用 1 個月動能，反映二階變化框架）",
+    "lookup": {
+      "ism_rising__cpi_falling": { "hope": 10, "growth": 5 },
+      "ism_rising__cpi_rising": { "growth": 8, "optimism": 7 },
+      "ism_falling__cpi_falling": { "despair": 5, "hope": 8 },
+      "ism_falling__cpi_rising": { "despair": 12 }
+    },
+    "axisDefinitions": {
+      "ism_axis": {
+        "rising": { "metric": "ism_momentum_1m", "gt": 0 },
+        "falling": { "metric": "ism_momentum_1m", "lte": 0 }
+      },
+      "cpi_axis": {
+        "falling": { "metric": "cpi_momentum_3m", "lt": 0 },
+        "rising": { "metric": "cpi_momentum_3m", "gte": 0 }
+      }
+    }
+  },
+  "output": {
+    "primaryPhase": {
+      "method": "max_score",
+      "tieBreaker": ["hope", "growth", "optimism", "despair"]
+    },
+    "secondaryPhases": {
+      "method": "within_percent_of_top",
+      "threshold": 0.85,
+      "description": "分數達最高分 85% 以上的階段列為可能次要階段"
+    },
+    "transitionLabel": {
+      "enabled": true,
+      "method": "top_two_phases",
+      "format": "{phaseA} → {phaseB}",
+      "description": "若前兩名相鄰且分數接近，輸出過渡期標籤"
+    },
+    "confidence": {
+      "levels": [
+        {
+          "id": "high",
+          "when": {
+            "scoreGapGte": 20,
+            "matchedRuleCountGte": 4
+          }
+        },
+        {
+          "id": "medium",
+          "when": {
+            "scoreGapGte": 10,
+            "matchedRuleCountGte": 2
+          }
+        },
+        {
+          "id": "low",
+          "default": true
+        }
+      ],
+      "scoreGapFormula": "top_score - second_score"
+    },
+    "signalsSummary": {
+      "bullish": { "label": { "zh": "偏多", "en": "Bullish" } },
+      "bearish": { "label": { "zh": "偏空", "en": "Bearish" } },
+      "caution": { "label": { "zh": "警戒", "en": "Caution" } },
+      "transition": { "label": { "zh": "轉折", "en": "Transition" } }
+    }
+  },
+  "guardrails": [
+    {
+      "id": "G01_never_single_indicator",
+      "zh": "不得僅憑單一指標下結論；至少需 ISM + CPI 同時可用。",
+      "en": "Never conclude from a single indicator; require ISM and CPI."
+    },
+    {
+      "id": "G02_show_matched_rules",
+      "zh": "輸出必須列出觸發規則與解讀，供使用者自行判斷。",
+      "en": "Output must list matched rules and interpretations."
+    },
+    {
+      "id": "G03_disclaimer_required",
+      "zh": "每次輸出必附免責聲明。",
+      "en": "Disclaimer required on every assessment."
+    },
+    {
+      "id": "G04_optional_data_degrade",
+      "zh": "若僅有 ISM/CPI，仍可評估但信心度最高為 medium。",
+      "en": "If only ISM/CPI available, cap confidence at medium."
+    }
+  ],
+  "exampleOutput": {
+    "updatedAt": "2026-09-02T02:00:00Z",
+    "estimatedPhase": {
+      "id": "hope",
+      "confidence": "medium",
+      "label": { "zh": "希望 → 成長 過渡期", "en": "Hope → Growth transition" }
+    },
+    "scores": {
+      "despair": 15,
+      "hope": 75,
+      "growth": 55,
+      "optimism": 20
+    },
+    "matchedRules": [
+      "R01_ism_inflecting_from_low",
+      "R05_cpi_disinflation",
+      "R17_hope_transition_combo"
+    ],
+    "signals": {
+      "ism": {
+        "value": 48.2,
+        "momentum3m": 1.5,
+        "signal": "bullish",
+        "interpretation": {
+          "zh": "ISM 低於 50 但動能回升，符合希望期特徵。"
+        }
+      },
+      "cpi": {
+        "yoy": 3.2,
+        "momentum3m": -0.4,
+        "signal": "neutral",
+        "interpretation": {
+          "zh": "通膨緩和，有利估值修復。"
+        }
+      }
+    },
+    "crossMatrix": {
+      "cell": "ism_rising__cpi_falling",
+      "bonusApplied": { "hope": 10, "growth": 5 }
+    },
+    "disclaimer": {
+      "zh": "本評估為規則引擎輸出之參考框架，非投資建議。",
+      "en": "Rule-based framework output; not investment advice."
+    }
+  }
+}

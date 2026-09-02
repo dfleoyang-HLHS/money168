@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Oppenheimer cycle assessment engine (v1)
+ * Oppenheimer cycle assessment engine (v2 — ISM second derivative)
  *
  * Reads:
- *   - data/cycle/assessment-rules.v1.json
+ *   - data/cycle/assessment-rules.v2.json
  *   - data/series/*.json
  *
  * Writes:
@@ -15,7 +15,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
-const RULES_PATH = path.join(DATA_DIR, "cycle", "assessment-rules.v1.json");
+const RULES_PATH = path.join(DATA_DIR, "cycle", "assessment-rules.v2.json");
 const OUTPUT_PATH = path.join(DATA_DIR, "cycle", "current-assessment.json");
 
 const PHASES = ["despair", "hope", "growth", "optimism"];
@@ -74,10 +74,16 @@ function buildMetrics() {
     const history = ism.history || ism.data || [];
     const latest = latestFromSeries(ism);
     const v1m = getHistoryValue(history, 1);
+    const v2m = getHistoryValue(history, 2);
     const v3m = getHistoryValue(history, 3);
     metrics["ism.latest.value"] = latest;
     metrics.ism_momentum_1m = latest != null && v1m != null ? latest - v1m : null;
+    metrics.ism_momentum_1m_prev = v1m != null && v2m != null ? v1m - v2m : null;
     metrics.ism_momentum_3m = latest != null && v3m != null ? latest - v3m : null;
+    metrics.ism_acceleration =
+      metrics.ism_momentum_1m != null && metrics.ism_momentum_1m_prev != null
+        ? metrics.ism_momentum_1m - metrics.ism_momentum_1m_prev
+        : null;
   }
 
   if (cpi) {
@@ -216,7 +222,7 @@ function assess() {
   }
 
   const cross = rulesDoc.crossMatrixBonus;
-  const ismRising = metrics.ism_momentum_3m != null && metrics.ism_momentum_3m > 0;
+  const ismRising = metrics.ism_momentum_1m != null && metrics.ism_momentum_1m > 0;
   const cpiFalling = metrics.cpi_momentum_3m != null && metrics.cpi_momentum_3m < 0;
   const crossKey = `${ismRising ? "ism_rising" : "ism_falling"}__${cpiFalling ? "cpi_falling" : "cpi_rising"}`;
   const crossBonus = cross.lookup[crossKey];

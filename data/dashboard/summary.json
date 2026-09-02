@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T09:25:24.140Z",
+  "updatedAt": "2026-09-02T09:42:24.248Z",
   "indicators": [
     {
       "id": "us10y",
@@ -177,8 +177,8 @@
     }
   ],
   "cycle": {
-    "estimatedPhase": "growth",
-    "phaseLabel": "成長",
+    "estimatedPhase": "hope",
+    "phaseLabel": "希望",
     "confidence": "medium"
   }
 }

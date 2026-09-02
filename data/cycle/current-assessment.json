@@ -1,29 +1,37 @@
 {
-  "updatedAt": "2026-09-02T09:25:24.124Z",
-  "ruleSetId": "oppenheimer_cycle_v1",
+  "updatedAt": "2026-09-02T09:42:19.774Z",
+  "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
-    "id": "growth",
+    "id": "hope",
     "confidence": "medium",
     "label": {
-      "zh": "成長",
-      "en": "growth"
+      "zh": "希望",
+      "en": "hope"
     }
   },
   "secondaryPhases": [],
   "scores": {
-    "despair": 0,
-    "hope": 35,
-    "growth": 45,
-    "optimism": 0
+    "despair": 5,
+    "hope": 55,
+    "growth": 30,
+    "optimism": 15
   },
-  "scoreGap": 10,
+  "scoreGap": 25,
   "matchedRules": [
     {
-      "id": "R03_ism_expansion_improving",
-      "signal": "bullish",
+      "id": "R24_ism_inflection_down",
+      "signal": "caution",
       "interpretation": {
-        "zh": "製造業擴張且動能向上，偏向成長期。",
-        "en": "Expanding and improving ISM; growth-phase bias."
+        "zh": "ISM 仍在擴張區，但動能轉弱且加速度為負，偏向樂觀/成長後段。",
+        "en": "ISM still expanding but momentum inflecting down; late growth/optimism warning."
+      }
+    },
+    {
+      "id": "R22_ism_expansion_short_term_pullback",
+      "signal": "transition",
+      "interpretation": {
+        "zh": "水準仍在擴張區，但近月動能轉負，常見於成長期向希望期過渡。",
+        "en": "Level still expanding but 1m momentum negative; growth-to-hope transition pattern."
       }
     },
     {
@@ -38,7 +46,9 @@
   "metricsUsed": {
     "ism.latest.value": 53.3,
     "ism_momentum_1m": -0.7000000000000028,
+    "ism_momentum_1m_prev": 1.2999999999999972,
     "ism_momentum_3m": 0.5999999999999943,
+    "ism_acceleration": -2,
     "cpi_yoy": 3.5397514271936714,
     "cpi_momentum_3m": -0.407275481510605,
     "pe_percentile_10y": 50,
@@ -53,10 +63,10 @@
     "curve_inverted": false
   },
   "crossMatrix": {
-    "cell": "ism_rising__cpi_falling",
+    "cell": "ism_falling__cpi_falling",
     "bonusApplied": {
-      "hope": 10,
-      "growth": 5
+      "despair": 5,
+      "hope": 8
     }
   },
   "dataAvailability": {

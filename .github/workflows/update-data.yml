@@ -21,6 +21,7 @@ jobs:
       - name: Fetch data and rebuild summaries
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          TRADING_ECONOMICS_API_KEY: ${{ secrets.TRADING_ECONOMICS_API_KEY }}
         run: node scripts/fetch-and-update.js
 
       - name: Commit and push if changed

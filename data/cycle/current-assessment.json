@@ -1,23 +1,31 @@
 {
-  "updatedAt": "2026-09-02T02:25:59.565Z",
+  "updatedAt": "2026-09-02T02:55:00.030Z",
   "ruleSetId": "oppenheimer_cycle_v1",
   "estimatedPhase": {
-    "id": "hope",
-    "confidence": "low",
+    "id": "growth",
+    "confidence": "medium",
     "label": {
-      "zh": "希望",
-      "en": "hope"
+      "zh": "成長",
+      "en": "growth"
     }
   },
   "secondaryPhases": [],
   "scores": {
     "despair": 0,
-    "hope": 25,
-    "growth": 15,
+    "hope": 35,
+    "growth": 45,
     "optimism": 0
   },
   "scoreGap": 10,
   "matchedRules": [
+    {
+      "id": "R03_ism_expansion_improving",
+      "signal": "bullish",
+      "interpretation": {
+        "zh": "製造業擴張且動能向上，偏向成長期。",
+        "en": "Expanding and improving ISM; growth-phase bias."
+      }
+    },
     {
       "id": "R05_cpi_disinflation",
       "signal": "bullish",
@@ -28,9 +36,9 @@
     }
   ],
   "metricsUsed": {
-    "ism.latest.value": 49.94,
-    "ism_momentum_1m": -0.7100000000000009,
-    "ism_momentum_3m": 0.8200000000000003,
+    "ism.latest.value": 53.3,
+    "ism_momentum_1m": -0.7000000000000028,
+    "ism_momentum_3m": 0.5999999999999943,
     "cpi_yoy": 2.2150154045727177,
     "cpi_momentum_3m": -0.25827501918656015,
     "pe_percentile_10y": 50,

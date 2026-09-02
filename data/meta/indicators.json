@@ -70,7 +70,8 @@
       "category": "manufacturing",
       "categoryLabel": { "en": "Manufacturing", "zh": "製造業" },
       "unit": "index",
-      "source": "ISM",
+      "source": "ISM (DBnomics + Bellwether)",
+      "sourceUrl": "https://db.nomics.world/ISM/pmi",
       "dataFile": "data/series/ism.json",
       "updateFrequency": "monthly",
       "description": {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T02:26:03.966Z",
+  "updatedAt": "2026-09-02T02:55:00.050Z",
   "indicators": [
     {
       "id": "us10y",
@@ -125,25 +125,25 @@
       },
       "category": "manufacturing",
       "latest": {
-        "value": 49.94,
+        "value": 53.3,
         "unit": "index",
-        "asOf": "2026-08-01"
+        "asOf": "2026-06-01"
       },
       "change": {
         "1d": null,
         "1w": 0,
-        "1m": -0.014017769002961518
+        "1m": -0.012962962962963016
       },
       "trend": "down",
       "sparkline": [
-        46.71,
-        48.54,
-        47.92,
-        48.78,
-        49.12,
-        48.27,
-        50.65,
-        49.94
+        48.2,
+        47.9,
+        52.6,
+        52.4,
+        52.7,
+        52.7,
+        54,
+        53.3
       ]
     },
     {
@@ -177,8 +177,8 @@
     }
   ],
   "cycle": {
-    "estimatedPhase": "hope",
-    "phaseLabel": "希望",
-    "confidence": "low"
+    "estimatedPhase": "growth",
+    "phaseLabel": "成長",
+    "confidence": "medium"
   }
 }

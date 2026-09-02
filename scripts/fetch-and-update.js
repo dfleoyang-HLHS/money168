@@ -157,12 +157,20 @@ async function main() {
     await new Promise((r) => setTimeout(r, 300));
   }
 
-  // ISM is not on FRED — preserve existing or note manual update
-  const ismPath = path.join(SERIES_DIR, "ism.json");
-  if (fs.existsSync(ismPath)) {
-    const ism = readJson(ismPath);
-    status.ism = { updatedAt: ism.updatedAt, status: "manual" };
-    console.log("  [keep] ism: preserved (not available on FRED)");
+  // Fetch ISM Manufacturing PMI from DBnomics + Bellwether + optional TE/FRED
+  console.log("Fetching ISM PMI...");
+  const { fetchIsm } = require("./fetch-ism.js");
+  let ismResult = null;
+  try {
+    ismResult = await fetchIsm();
+    status.ism = { updatedAt: ismResult.updatedAt, status: "ok" };
+  } catch (err) {
+    console.error(`  [err] ism: ${err.message}`);
+    const ismPath = path.join(SERIES_DIR, "ism.json");
+    if (fs.existsSync(ismPath)) {
+      const ism = readJson(ismPath);
+      status.ism = { updatedAt: ism.updatedAt, status: "stale" };
+    }
   }
 
   // Auxiliary series derived or preserved

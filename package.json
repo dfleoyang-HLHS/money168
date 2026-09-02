@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "fetch-data": "node scripts/fetch-and-update.js",
+    "fetch-ism": "node scripts/fetch-ism.js",
     "assess-cycle": "node scripts/calculate-cycle-assessment.js",
-    "update-all": "npm run fetch-data && npm run assess-cycle"
+    "update-all": "npm run fetch-data && npm run assess-cycle",
+    "build:pages": "STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/money168 next build"
   },
   "dependencies": {
     "next": "^14.2.5",

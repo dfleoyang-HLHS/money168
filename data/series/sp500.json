@@ -1,0 +1,14 @@
+{
+  "id": "sp500",
+  "updatedAt": "2026-09-02T00:00:00Z",
+  "source": "placeholder",
+  "unit": "index",
+  "frequency": "daily",
+  "latest": { "date": "2026-08-29", "value": 5450, "return6m": 0.12, "return12m": 0.18, "drawdownFromPeak": -0.03 },
+  "history": [
+    { "date": "2025-02-28", "value": 4600 },
+    { "date": "2025-08-29", "value": 4860 },
+    { "date": "2026-02-28", "value": 5100 },
+    { "date": "2026-08-29", "value": 5450 }
+  ]
+}

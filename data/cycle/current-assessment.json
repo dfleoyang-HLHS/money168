@@ -1,0 +1,66 @@
+{
+  "updatedAt": "2026-09-02T02:11:40.912Z",
+  "ruleSetId": "oppenheimer_cycle_v1",
+  "estimatedPhase": {
+    "id": "hope",
+    "confidence": "medium",
+    "label": {
+      "zh": "希望",
+      "en": "hope"
+    }
+  },
+  "secondaryPhases": [],
+  "scores": {
+    "despair": 0,
+    "hope": 60,
+    "growth": 25,
+    "optimism": 0
+  },
+  "scoreGap": 35,
+  "matchedRules": [
+    {
+      "id": "R01_ism_inflecting_from_low",
+      "signal": "bullish",
+      "interpretation": {
+        "zh": "ISM 低於 50 但動能回升，符合書中『疲弱但改善』的希望期特徵。",
+        "en": "ISM below 50 with improving momentum; classic hope-phase setup."
+      }
+    },
+    {
+      "id": "R05_cpi_disinflation",
+      "signal": "bullish",
+      "interpretation": {
+        "zh": "通膨趨勢回落，有利政策轉向與估值修復。",
+        "en": "Disinflation supports policy pivot and valuation repair."
+      }
+    }
+  ],
+  "metricsUsed": {
+    "ism.latest.value": 48.2,
+    "ism_momentum_1m": 0.10000000000000142,
+    "ism_momentum_3m": 0.20000000000000284,
+    "cpi_yoy": 0.7672634271099765,
+    "cpi_momentum_3m": -0.8778978632126178,
+    "return_6m": 0.12,
+    "return_12m": 0.18,
+    "drawdown_from_peak": 0
+  },
+  "crossMatrix": {
+    "cell": "ism_rising__cpi_falling",
+    "bonusApplied": {
+      "hope": 10,
+      "growth": 5
+    }
+  },
+  "dataAvailability": {
+    "ism": true,
+    "cpi": true,
+    "valuation": false,
+    "earnings": false,
+    "market": true
+  },
+  "disclaimer": {
+    "zh": "本評估為規則引擎輸出之參考框架，非投資建議。",
+    "en": "Rule-based framework output; not investment advice."
+  }
+}

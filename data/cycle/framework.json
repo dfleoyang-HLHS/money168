@@ -1,0 +1,784 @@
+{
+  "$schema": "./framework.schema.json",
+  "version": "1.0.0",
+  "updatedAt": "2026-09-02T00:00:00Z",
+  "source": {
+    "book": {
+      "titleEn": "The Long Good Buy: Analysing Cycles in Markets",
+      "titleZh": "進場的訊號",
+      "author": "Peter C. Oppenheimer",
+      "publisher": "Wiley",
+      "year": 2020
+    },
+    "notes": [
+      "Phase statistics are long-run US equity market averages cited in the book.",
+      "Framework is descriptive, not a market-timing model.",
+      "Returns labeled annualized are per book summaries; phase cumulative returns are noted separately."
+    ]
+  },
+  "cycleModel": {
+    "id": "oppenheimer_four_phase",
+    "name": {
+      "en": "Oppenheimer Four-Phase Equity Cycle",
+      "zh": "奧本海默四階段股票週期"
+    },
+    "sequence": ["despair", "hope", "growth", "optimism"],
+    "avgFullCycleMonths": 97,
+    "principles": [
+      {
+        "id": "second_derivative",
+        "zh": "二階變化比絕對水準更重要",
+        "en": "Rate of change matters more than absolute level"
+      },
+      {
+        "id": "anticipation",
+        "zh": "股市反映預期，而非當下盈餘",
+        "en": "Markets price expectations, not current earnings"
+      },
+      {
+        "id": "valuation_timing",
+        "zh": "估值很少單獨觸發下跌，但會放大其他風險",
+        "en": "Valuation alone rarely triggers a fall but amplifies other risks"
+      },
+      {
+        "id": "not_for_timing",
+        "zh": "框架用於理解風險報酬，不用於精準擇時",
+        "en": "Framework is for risk-reward context, not precise timing"
+      }
+    ]
+  },
+  "phases": [
+    {
+      "id": "despair",
+      "order": 1,
+      "name": {
+        "en": "Despair",
+        "zh": "絕望"
+      },
+      "aliases": {
+        "en": ["Bear Market", "Contraction"],
+        "zh": ["熊市", "收縮期"]
+      },
+      "summary": {
+        "zh": "市場由高峰回落到谷底，估值收縮為主，通常伴隨衰退預期與盈餘下滑。",
+        "en": "Market moves from peak to trough, mainly driven by valuation contraction and recession fears."
+      },
+      "duration": {
+        "avgMonths": 16,
+        "unit": "months",
+        "relativeRank": 2,
+        "note": {
+          "zh": "四階段中第二短，僅長於希望期。",
+          "en": "Second shortest phase after hope."
+        }
+      },
+      "returns": {
+        "avgRealReturn": -0.43,
+        "returnType": "phase_cumulative_real",
+        "annualizedReturn": null,
+        "returnRank": 4,
+        "primaryDriver": "valuation_contraction",
+        "drivers": {
+          "priceContribution": "dominant_negative",
+          "earningsContribution": "negative",
+          "dividendContribution": "minor"
+        },
+        "peakReturnProfile": {
+          "zh": "四階段中報酬最低，常見大幅回撤。",
+          "en": "Worst phase for equities; deep drawdowns are common."
+        }
+      },
+      "earnings": {
+        "growthLevel": "negative",
+        "growthTrend": "deteriorating",
+        "epsBehavior": {
+          "zh": "企業盈餘明顯下滑，獲利預期下修。",
+          "en": "Corporate profits fall and expectations are revised down."
+        }
+      },
+      "valuation": {
+        "peBehavior": "contracting",
+        "peDirection": "down",
+        "riskPremium": "very_high",
+        "forwardExpectation": {
+          "zh": "投資人要求更高風險溢酬才願意進場。",
+          "en": "Investors demand a higher risk premium to hold equities."
+        }
+      },
+      "macroContext": {
+        "typicalGrowth": "recession_or_sharp_slowdown",
+        "typicalInflation": "variable",
+        "policyBias": "easing_or_about_to_ease",
+        "sentiment": "fearful"
+      },
+      "ismProfile": {
+        "level": "below_50",
+        "momentum": "deteriorating_or_bottoming",
+        "signal": {
+          "zh": "ISM 常低於 50；若持續惡化，報酬風險仍高。",
+          "en": "ISM is often below 50; further deterioration keeps risk elevated."
+        }
+      },
+      "cpiProfile": {
+        "level": "variable",
+        "momentum": "variable",
+        "signal": {
+          "zh": "高通膨疊加緊縮政策時，絕望期可能更深更長。",
+          "en": "High inflation plus tightening can deepen and lengthen despair."
+        }
+      },
+      "expectedOutcome": {
+        "zh": "風險高、報酬差，但常是長期進場的起點。",
+        "en": "High risk and poor returns, but often the starting point for long-term entry."
+      },
+      "investorPsychology": {
+        "zh": "恐慌、風險厭惡、追求資本保全。",
+        "en": "Fear, risk aversion, capital preservation."
+      },
+      "assetClassTendencies": {
+        "equities": "worst",
+        "government_bonds": "strong",
+        "credit": "weak",
+        "commodities": "mixed",
+        "defensives_vs_cyclicals": "defensives_outperform"
+      },
+      "warningSigns": [
+        {
+          "zh": "估值快速收縮且盈餘預期持續下修",
+          "en": "Rapid multiple compression with falling earnings expectations"
+        },
+        {
+          "zh": "失業率由低位轉升",
+          "en": "Unemployment rising from cycle lows"
+        }
+      ],
+      "historicalExamples": [
+        {
+          "label": "GFC Bear Market",
+          "market": "US",
+          "start": "2007-10",
+          "end": "2009-03"
+        },
+        {
+          "label": "COVID Crash",
+          "market": "US",
+          "start": "2020-02",
+          "end": "2020-03"
+        }
+      ]
+    },
+    {
+      "id": "hope",
+      "order": 2,
+      "name": {
+        "en": "Hope",
+        "zh": "希望"
+      },
+      "aliases": {
+        "en": ["Recovery Anticipation"],
+        "zh": ["復甦預期期"]
+      },
+      "summary": {
+        "zh": "最短但爆發力最強；市場在盈餘仍弱時，因預期復甦而反彈，估值擴張主導報酬。",
+        "en": "Shortest but most explosive phase; markets rebound on recovery expectations before earnings recover."
+      },
+      "duration": {
+        "avgMonths": 9,
+        "unit": "months",
+        "relativeRank": 1,
+        "note": {
+          "zh": "四階段中最短。",
+          "en": "Shortest of the four phases."
+        }
+      },
+      "returns": {
+        "avgRealReturn": 0.44,
+        "returnType": "annualized_real",
+        "phaseCumulativeReturnHint": null,
+        "returnRank": 1,
+        "primaryDriver": "valuation_expansion",
+        "drivers": {
+          "priceContribution": "dominant_positive",
+          "earningsContribution": "weak_or_negative",
+          "dividendContribution": "minor"
+        },
+        "peakReturnProfile": {
+          "zh": "年化報酬通常最高，多數來自股價而非盈餘。",
+          "en": "Typically the highest annualized returns, mostly from price not earnings."
+        }
+      },
+      "earnings": {
+        "growthLevel": "negative_or_flat",
+        "growthTrend": "bottoming",
+        "epsBehavior": {
+          "zh": "盈餘仍偏弱，但下滑速度放緩或見底。",
+          "en": "Profits are still weak, but the pace of decline slows or bottoms."
+        }
+      },
+      "valuation": {
+        "peBehavior": "expanding",
+        "peDirection": "up",
+        "riskPremium": "high_to_medium",
+        "forwardExpectation": {
+          "zh": "市場提前為未來復甦付費（prepay recovery）。",
+          "en": "Markets prepay for expected recovery."
+        }
+      },
+      "macroContext": {
+        "typicalGrowth": "weak_but_improving",
+        "typicalInflation": "falling_or_stabilizing",
+        "policyBias": "accommodative",
+        "sentiment": "cautious_recovery"
+      },
+      "ismProfile": {
+        "level": "below_50_or_near_50",
+        "momentum": "inflecting_up",
+        "signal": {
+          "zh": "ISM 常低於 50 但出現回升拐點時，歷史上最有利。",
+          "en": "Historically strongest when ISM is below 50 but inflecting upward."
+        }
+      },
+      "cpiProfile": {
+        "level": "moderate_or_falling",
+        "momentum": "falling",
+        "signal": {
+          "zh": "通膨緩和有助於政策轉向與估值修復。",
+          "en": "Cooling inflation supports policy easing and valuation repair."
+        }
+      },
+      "expectedOutcome": {
+        "zh": "高報酬潛力，但持續時間短，錯過代價大。",
+        "en": "High return potential, but short duration and costly to miss."
+      },
+      "investorPsychology": {
+        "zh": "從絕望轉向謹慎樂觀，開始重估未來。",
+        "en": "Shift from despair to cautious optimism."
+      },
+      "assetClassTendencies": {
+        "equities": "best",
+        "government_bonds": "positive",
+        "credit": "recovering",
+        "commodities": "early_recovery",
+        "defensives_vs_cyclicals": "cyclicals_start_outperforming"
+      },
+      "warningSigns": [
+        {
+          "zh": "反彈僅靠估值，宏觀數據未見改善",
+          "en": "Rally driven only by valuation without macro improvement"
+        }
+      ],
+      "historicalExamples": [
+        {
+          "label": "Post-GFC Recovery Start",
+          "market": "US",
+          "start": "2009-03",
+          "end": "2009-12"
+        },
+        {
+          "label": "Post-COVID Recovery Start",
+          "market": "US",
+          "start": "2020-03",
+          "end": "2020-12"
+        }
+      ]
+    },
+    {
+      "id": "growth",
+      "order": 3,
+      "name": {
+        "en": "Growth",
+        "zh": "成長"
+      },
+      "aliases": {
+        "en": ["Expansion"],
+        "zh": ["擴張期"]
+      },
+      "summary": {
+        "zh": "最長階段，經濟與企業盈餘實際擴張，但部分報酬已在希望期預付。",
+        "en": "Longest phase; actual economic and earnings expansion, but some returns were prepaid in hope."
+      },
+      "duration": {
+        "avgMonths": 49,
+        "unit": "months",
+        "relativeRank": 4,
+        "note": {
+          "zh": "四階段中最長，約占完整週期一半。",
+          "en": "Longest phase; roughly half of a full cycle."
+        }
+      },
+      "returns": {
+        "avgRealReturn": 0.16,
+        "returnType": "annualized_real",
+        "phaseCumulativeReturnHint": null,
+        "returnRank": 3,
+        "primaryDriver": "earnings_growth",
+        "drivers": {
+          "priceContribution": "moderate_positive",
+          "earningsContribution": "dominant_positive",
+          "dividendContribution": "meaningful"
+        },
+        "peakReturnProfile": {
+          "zh": "報酬穩健但非最高，因估值擴張空間有限。",
+          "en": "Steady but not peak returns; less room for multiple expansion."
+        }
+      },
+      "earnings": {
+        "growthLevel": "positive_strong",
+        "growthTrend": "improving",
+        "epsBehavior": {
+          "zh": "企業獲利與經濟活動實際回升。",
+          "en": "Corporate profits and economic activity genuinely recover."
+        }
+      },
+      "valuation": {
+        "peBehavior": "stable_or_falling",
+        "peDirection": "flat_to_down",
+        "riskPremium": "medium_to_low",
+        "forwardExpectation": {
+          "zh": "市場更依賴基本面，而非純預期。",
+          "en": "Markets rely more on fundamentals than pure anticipation."
+        }
+      },
+      "macroContext": {
+        "typicalGrowth": "expansion",
+        "typicalInflation": "stable",
+        "policyBias": "neutral_to_tightening_late",
+        "sentiment": "constructive"
+      },
+      "ismProfile": {
+        "level": "above_50",
+        "momentum": "positive_but_watch_peaking",
+        "signal": {
+          "zh": "ISM 多高於 50；成長期內可用 PMI/ISM 觀察迷你週期。",
+          "en": "ISM often above 50; mini-cycles within growth can be tracked via PMI/ISM."
+        }
+      },
+      "cpiProfile": {
+        "level": "stable",
+        "momentum": "stable",
+        "signal": {
+          "zh": "通膨溫和時，成長期通常較平穩。",
+          "en": "Moderate inflation tends to support a stable growth phase."
+        }
+      },
+      "expectedOutcome": {
+        "zh": "長期持有體驗最好，但單年爆發力通常不如希望期。",
+        "en": "Best phase for long holding periods, but less explosive than hope."
+      },
+      "investorPsychology": {
+        "zh": "信心恢復，關注基本面與獲利能見度。",
+        "en": "Confidence returns; focus shifts to fundamentals."
+      },
+      "assetClassTendencies": {
+        "equities": "good",
+        "government_bonds": "mixed",
+        "credit": "strong",
+        "commodities": "positive",
+        "defensives_vs_cyclicals": "cyclicals_outperform"
+      },
+      "warningSigns": [
+        {
+          "zh": "ISM 處高位但動能轉弱（二階導數轉負）",
+          "en": "ISM elevated but momentum turning down"
+        },
+        {
+          "zh": "利率快速上升壓制估值",
+          "en": "Rapid rate rises compress valuations"
+        }
+      ],
+      "historicalExamples": [
+        {
+          "label": "Post-GFC Growth Phase",
+          "market": "US",
+          "start": "2010-01",
+          "end": "2014-06"
+        }
+      ]
+    },
+    {
+      "id": "optimism",
+      "order": 4,
+      "name": {
+        "en": "Optimism",
+        "zh": "樂觀"
+      },
+      "aliases": {
+        "en": ["Late Cycle", "Complacency"],
+        "zh": ["後周期", "樂觀期"]
+      },
+      "summary": {
+        "zh": "估值再度擴張並超過盈餘增速，投資人信心偏高，為下一輪修正埋下伏筆。",
+        "en": "Valuations rise again and outpace earnings; confidence turns complacent."
+      },
+      "duration": {
+        "avgMonths": 23,
+        "unit": "months",
+        "relativeRank": 3,
+        "note": {
+          "zh": "晚期擴張，時間長於希望期但短於成長期。",
+          "en": "Late-cycle expansion; longer than hope but shorter than growth."
+        }
+      },
+      "returns": {
+        "avgRealReturn": 0.62,
+        "returnType": "phase_cumulative_real",
+        "annualizedReturn": null,
+        "returnRank": 2,
+        "primaryDriver": "valuation_expansion",
+        "drivers": {
+          "priceContribution": "dominant_positive",
+          "earningsContribution": "slowing",
+          "dividendContribution": "moderate"
+        },
+        "peakReturnProfile": {
+          "zh": "累計報酬可觀，但前瞻報酬通常下降。",
+          "en": "Strong cumulative returns, but forward-looking returns tend to fall."
+        }
+      },
+      "earnings": {
+        "growthLevel": "positive_but_slowing",
+        "growthTrend": "decelerating",
+        "epsBehavior": {
+          "zh": "盈餘仍成長，但增速放緩。",
+          "en": "Earnings still grow, but momentum slows."
+        }
+      },
+      "valuation": {
+        "peBehavior": "expanding",
+        "peDirection": "up",
+        "riskPremium": "low",
+        "forwardExpectation": {
+          "zh": "估值上升吸引資金回流，形成自我強化。",
+          "en": "Rising valuations attract flows and become self-reinforcing."
+        }
+      },
+      "macroContext": {
+        "typicalGrowth": "late_cycle_expansion",
+        "typicalInflation": "sticky_or_reaccelerating",
+        "policyBias": "tightening",
+        "sentiment": "complacent"
+      },
+      "ismProfile": {
+        "level": "high",
+        "momentum": "peaking_or_flat",
+        "signal": {
+          "zh": "ISM 常處高位；若見頂回落，需提高警戒。",
+          "en": "ISM often elevated; peaking and rolling over raises caution."
+        }
+      },
+      "cpiProfile": {
+        "level": "moderate_to_high",
+        "momentum": "sticky",
+        "signal": {
+          "zh": "通膨黏性會限制政策空間並提高估值壓力。",
+          "en": "Sticky inflation limits policy flexibility and pressures valuations."
+        }
+      },
+      "expectedOutcome": {
+        "zh": "表面強勢，但風險報酬比惡化。",
+        "en": "Surface strength, but deteriorating risk-reward."
+      },
+      "investorPsychology": {
+        "zh": "樂觀、追逐風險，容易低估尾部風險。",
+        "en": "Optimistic, risk-seeking, tail risks underestimated."
+      },
+      "assetClassTendencies": {
+        "equities": "strong_but_vulnerable",
+        "government_bonds": "weak",
+        "credit": "tightening_spreads_risk",
+        "commodities": "mixed",
+        "defensives_vs_cyclicals": "narrow_leadership_risk"
+      },
+      "warningSigns": [
+        {
+          "zh": "失業率處周期低位且估值偏高",
+          "en": "Cycle-low unemployment with elevated valuations"
+        },
+        {
+          "zh": "收益率曲線平坦化或倒掛",
+          "en": "Flat or inverted yield curve"
+        },
+        {
+          "zh": "盈餘成長放緩但估值持續擴張",
+          "en": "Slowing earnings growth with continued multiple expansion"
+        }
+      ],
+      "historicalExamples": [
+        {
+          "label": "Late 2010s Expansion",
+          "market": "US",
+          "start": "2014-07",
+          "end": "2020-02"
+        },
+        {
+          "label": "Post-2022 Rally",
+          "market": "US",
+          "start": "2022-10",
+          "end": null
+        }
+      ]
+    }
+  ],
+  "comparisonMatrix": {
+    "description": {
+      "zh": "四階段核心維度對照表",
+      "en": "Cross-phase comparison of key dimensions"
+    },
+    "dimensions": [
+      {
+        "id": "duration",
+        "label": { "zh": "平均持續", "en": "Avg Duration" },
+        "unit": "months",
+        "values": {
+          "despair": 16,
+          "hope": 9,
+          "growth": 49,
+          "optimism": 23
+        }
+      },
+      {
+        "id": "returns",
+        "label": { "zh": "平均報酬", "en": "Avg Return" },
+        "unit": "ratio",
+        "values": {
+          "despair": -0.43,
+          "hope": 0.44,
+          "growth": 0.16,
+          "optimism": 0.62
+        },
+        "returnTypes": {
+          "despair": "phase_cumulative_real",
+          "hope": "annualized_real",
+          "growth": "annualized_real",
+          "optimism": "phase_cumulative_real"
+        }
+      },
+      {
+        "id": "earningsGrowth",
+        "label": { "zh": "盈餘成長", "en": "Earnings Growth" },
+        "values": {
+          "despair": "negative",
+          "hope": "bottoming",
+          "growth": "strong_positive",
+          "optimism": "slowing"
+        }
+      },
+      {
+        "id": "valuationDriver",
+        "label": { "zh": "估值驅動", "en": "Valuation Driver" },
+        "values": {
+          "despair": "contraction",
+          "hope": "expansion",
+          "growth": "stable",
+          "optimism": "expansion"
+        }
+      },
+      {
+        "id": "expectedFutureBenefit",
+        "label": { "zh": "預期未來效益", "en": "Forward Expectation" },
+        "values": {
+          "despair": "very_low",
+          "hope": "rapidly_improving",
+          "growth": "realized",
+          "optimism": "overpriced"
+        }
+      },
+      {
+        "id": "riskPremium",
+        "label": { "zh": "風險溢酬", "en": "Risk Premium" },
+        "values": {
+          "despair": "very_high",
+          "hope": "high_to_medium",
+          "growth": "medium_to_low",
+          "optimism": "low"
+        }
+      },
+      {
+        "id": "peakReturnRank",
+        "label": { "zh": "報酬爆發力排名", "en": "Return Burst Rank" },
+        "values": {
+          "despair": 4,
+          "hope": 1,
+          "growth": 3,
+          "optimism": 2
+        }
+      }
+    ]
+  },
+  "keyIndicators": [
+    {
+      "id": "ism",
+      "name": {
+        "en": "ISM Manufacturing PMI",
+        "zh": "ISM 製造業採購經理人指數"
+      },
+      "role": "growth_momentum",
+      "priority": 1,
+      "dataFile": "series/ism.json",
+      "frequency": "monthly",
+      "thresholds": {
+        "contraction": 50,
+        "neutralLow": 50,
+        "neutralHigh": 52,
+        "strong": 55,
+        "veryStrong": 58
+      },
+      "interpretation": {
+        "level": {
+          "below_50": {
+            "zh": "製造業活動收縮，通常對應疲弱景氣。",
+            "en": "Manufacturing contraction; typically weak activity."
+          },
+          "above_50": {
+            "zh": "製造業活動擴張。",
+            "en": "Manufacturing expansion."
+          }
+        },
+        "momentum": {
+          "inflecting_up_from_low": {
+            "zh": "書中強調的最佳組合：疲弱但開始回升。",
+            "en": "Book highlight: weak but inflecting upward."
+          },
+          "deteriorating_from_high": {
+            "zh": "高位但惡化，常見於周期末端。",
+            "en": "High but deteriorating; often late-cycle."
+          }
+        }
+      },
+      "preferredPhases": ["hope", "growth"],
+      "cautionPhases": ["despair", "optimism"]
+    },
+    {
+      "id": "cpi",
+      "name": {
+        "en": "Consumer Price Index (YoY)",
+        "zh": "消費者物價指數（年增率）"
+      },
+      "role": "inflation_policy",
+      "priority": 2,
+      "dataFile": "series/cpi.json",
+      "frequency": "monthly",
+      "thresholds": {
+        "veryLow": 1.0,
+        "target": 2.0,
+        "moderate": 3.0,
+        "elevated": 4.0,
+        "high": 5.0
+      },
+      "interpretation": {
+        "level": {
+          "low": {
+            "zh": "低通膨環境，有利估值與政策空間。",
+            "en": "Low inflation supports valuations and policy flexibility."
+          },
+          "elevated": {
+            "zh": "高通膨提高緊縮風險，壓制風險資產。",
+            "en": "High inflation raises tightening risk and pressures risk assets."
+          }
+        },
+        "momentum": {
+          "falling": {
+            "zh": "通膨回落常伴隨政策轉向預期。",
+            "en": "Disinflation often precedes policy pivot expectations."
+          },
+          "reaccelerating": {
+            "zh": "通膨再升通常提高利率與波動。",
+            "en": "Reaccelerating inflation tends to lift rates and volatility."
+          }
+        }
+      },
+      "preferredPhases": ["hope", "growth"],
+      "cautionPhases": ["despair", "optimism"]
+    }
+  ],
+  "auxiliaryIndicators": [
+    {
+      "id": "sp500_pe",
+      "name": { "en": "S&P 500 P/E", "zh": "標普500本益比" },
+      "role": "valuation",
+      "dataFile": "series/sp500_pe.json"
+    },
+    {
+      "id": "sp500_eps_growth",
+      "name": { "en": "S&P 500 EPS Growth YoY", "zh": "標普500盈餘年增率" },
+      "role": "earnings",
+      "dataFile": "series/sp500_eps.json"
+    },
+    {
+      "id": "sp500_return_12m",
+      "name": { "en": "S&P 500 12M Return", "zh": "標普500近12月報酬" },
+      "role": "market_performance",
+      "dataFile": "series/sp500.json"
+    },
+    {
+      "id": "unemployment",
+      "name": { "en": "Unemployment Rate", "zh": "失業率" },
+      "role": "late_cycle_risk",
+      "dataFile": "series/unemployment.json"
+    },
+    {
+      "id": "yield_curve_10y_3m",
+      "name": { "en": "10Y-3M Yield Spread", "zh": "10年-3月利差" },
+      "role": "recession_risk",
+      "dataFile": "series/yield_curve.json"
+    }
+  ],
+  "crossSignalMatrix": {
+    "description": {
+      "zh": "ISM 與 CPI 交叉解讀矩陣",
+      "en": "ISM x CPI cross-interpretation matrix"
+    },
+    "rows": ["ism_rising", "ism_falling"],
+    "columns": ["cpi_falling", "cpi_rising"],
+    "cells": {
+      "ism_rising__cpi_falling": {
+        "label": { "zh": "復甦 + 通膨緩和", "en": "Recovery + Disinflation" },
+        "favoredPhases": ["hope", "growth"],
+        "bias": "bullish",
+        "note": {
+          "zh": "最接近書中『疲弱但改善』的利多組合。",
+          "en": "Closest to the book's weak-but-improving bullish setup."
+        }
+      },
+      "ism_rising__cpi_rising": {
+        "label": { "zh": "復甦 + 通膨升溫", "en": "Recovery + Rising Inflation" },
+        "favoredPhases": ["growth", "optimism"],
+        "bias": "mixed",
+        "note": {
+          "zh": "成長仍在，但需警惕政策緊縮。",
+          "en": "Growth can continue, but policy tightening risk rises."
+        }
+      },
+      "ism_falling__cpi_falling": {
+        "label": { "zh": "衰退壓力 + 通膨回落", "en": "Slowdown + Disinflation" },
+        "favoredPhases": ["despair", "hope"],
+        "bias": "transition",
+        "note": {
+          "zh": "可能接近周期底部，觀察 ISM 拐點。",
+          "en": "May be near cycle trough; watch for ISM inflection."
+        }
+      },
+      "ism_falling__cpi_rising": {
+        "label": { "zh": "衰退壓力 + 通膨升溫", "en": "Slowdown + Rising Inflation" },
+        "favoredPhases": ["despair"],
+        "bias": "bearish",
+        "note": {
+          "zh": "類滯脹風險，常見於深度修正期。",
+          "en": "Stagflation-like risk; common in deep corrections."
+        }
+      }
+    }
+  },
+  "ui": {
+    "disclaimer": {
+      "zh": "本框架引用《進場的訊號》之歷史統計與概念，僅供研究與教育用途，不構成投資建議。",
+      "en": "Framework based on historical statistics and concepts from The Long Good Buy; for research and education only, not investment advice."
+    },
+    "phaseColors": {
+      "despair": "#8B0000",
+      "hope": "#2E8B57",
+      "growth": "#1E90FF",
+      "optimism": "#DAA520"
+    }
+  }
+}

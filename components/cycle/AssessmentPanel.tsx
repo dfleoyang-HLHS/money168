@@ -27,7 +27,7 @@ export default function AssessmentPanel({ assessment }: AssessmentPanelProps) {
       <div>
         <h2 className="text-lg font-semibold">週期位置評估</h2>
         <p className="mt-1 text-sm text-slate-400">
-          規則引擎 v1 · 更新於 {new Date(assessment.updatedAt).toLocaleString("zh-TW")}
+          規則引擎 {assessment.ruleSetId.replace("oppenheimer_cycle_", "v")} · 更新於 {new Date(assessment.updatedAt).toLocaleString("zh-TW")}
         </p>
       </div>
 

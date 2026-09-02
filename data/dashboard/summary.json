@@ -1,0 +1,184 @@
+{
+  "updatedAt": "2026-09-02T02:26:03.966Z",
+  "indicators": [
+    {
+      "id": "us10y",
+      "name": {
+        "en": "US 10Y Treasury Yield",
+        "zh": "美國10年期公債殖利率"
+      },
+      "category": "macro_rates",
+      "latest": {
+        "value": 3.84,
+        "unit": "%",
+        "asOf": "2026-08-31"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": -0.03274559193954668
+      },
+      "trend": "down",
+      "sparkline": [
+        3.91,
+        3.73,
+        3.63,
+        4.06,
+        3.76,
+        3.84,
+        3.97,
+        3.84
+      ]
+    },
+    {
+      "id": "vix",
+      "name": {
+        "en": "VIX Volatility Index",
+        "zh": "VIX 恐慌指數"
+      },
+      "category": "risk_sentiment",
+      "latest": {
+        "value": 16.96,
+        "unit": "index",
+        "asOf": "2026-08-31"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": -0.09739222990952626
+      },
+      "trend": "down",
+      "sparkline": [
+        20.93,
+        18.59,
+        17.14,
+        21.03,
+        17.62,
+        17.95,
+        18.79,
+        16.96
+      ]
+    },
+    {
+      "id": "sp500",
+      "name": {
+        "en": "S&P 500 Index",
+        "zh": "標普500指數"
+      },
+      "category": "equity",
+      "latest": {
+        "value": 5500,
+        "unit": "index",
+        "asOf": "2026-08-31"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": 0
+      },
+      "trend": "flat",
+      "sparkline": [
+        5004.2,
+        5058.77,
+        5133.28,
+        5294.42,
+        5335.47,
+        5428.88,
+        5500,
+        5500
+      ]
+    },
+    {
+      "id": "cpi",
+      "name": {
+        "en": "CPI (YoY)",
+        "zh": "消費者物價指數（年增）"
+      },
+      "category": "inflation",
+      "latest": {
+        "value": 2.21,
+        "unit": "%",
+        "asOf": "2026-08-01"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": 0.000571428571428593
+      },
+      "trend": "flat",
+      "sparkline": [
+        311.02,
+        312.1,
+        312.36,
+        313.09,
+        313.64,
+        313.78,
+        315,
+        315.18
+      ]
+    },
+    {
+      "id": "ism",
+      "name": {
+        "en": "ISM Manufacturing PMI",
+        "zh": "ISM 製造業 PMI"
+      },
+      "category": "manufacturing",
+      "latest": {
+        "value": 49.94,
+        "unit": "index",
+        "asOf": "2026-08-01"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": -0.014017769002961518
+      },
+      "trend": "down",
+      "sparkline": [
+        46.71,
+        48.54,
+        47.92,
+        48.78,
+        49.12,
+        48.27,
+        50.65,
+        49.94
+      ]
+    },
+    {
+      "id": "unemployment",
+      "name": {
+        "en": "US Unemployment Rate",
+        "zh": "美國失業率"
+      },
+      "category": "labor",
+      "latest": {
+        "value": 3.79,
+        "unit": "%",
+        "asOf": "2026-08-01"
+      },
+      "change": {
+        "1d": null,
+        "1w": 0,
+        "1m": -0.04534005037783379
+      },
+      "trend": "down",
+      "sparkline": [
+        4.1,
+        4.2,
+        4,
+        4.01,
+        3.95,
+        3.76,
+        3.97,
+        3.79
+      ]
+    }
+  ],
+  "cycle": {
+    "estimatedPhase": "hope",
+    "phaseLabel": "希望",
+    "confidence": "low"
+  }
+}

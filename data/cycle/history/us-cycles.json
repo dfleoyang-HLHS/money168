@@ -1,0 +1,24 @@
+{
+  "cycles": [
+    {
+      "id": "gfc_recovery",
+      "name": "2008 金融危機後復甦",
+      "phases": [
+        { "phase": "despair", "start": "2007-10", "end": "2009-03", "sp500Return": -0.57 },
+        { "phase": "hope", "start": "2009-03", "end": "2009-12", "sp500Return": 0.65 },
+        { "phase": "growth", "start": "2010-01", "end": "2014-06", "sp500Return": 0.89 },
+        { "phase": "optimism", "start": "2014-07", "end": "2020-02", "sp500Return": 1.20 }
+      ]
+    },
+    {
+      "id": "covid_cycle",
+      "name": "2020 疫情週期",
+      "phases": [
+        { "phase": "despair", "start": "2020-02", "end": "2020-03", "sp500Return": -0.34 },
+        { "phase": "hope", "start": "2020-03", "end": "2020-12", "sp500Return": 0.68 },
+        { "phase": "growth", "start": "2021-01", "end": "2022-10", "sp500Return": -0.05 },
+        { "phase": "optimism", "start": "2022-10", "end": null, "sp500Return": 0.45 }
+      ]
+    }
+  ]
+}

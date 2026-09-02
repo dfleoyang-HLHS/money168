@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-02T02:11:40.912Z",
+  "updatedAt": "2026-09-02T02:25:59.565Z",
   "ruleSetId": "oppenheimer_cycle_v1",
   "estimatedPhase": {
     "id": "hope",
-    "confidence": "medium",
+    "confidence": "low",
     "label": {
       "zh": "希望",
       "en": "hope"
@@ -12,20 +12,12 @@
   "secondaryPhases": [],
   "scores": {
     "despair": 0,
-    "hope": 60,
-    "growth": 25,
+    "hope": 25,
+    "growth": 15,
     "optimism": 0
   },
-  "scoreGap": 35,
+  "scoreGap": 10,
   "matchedRules": [
-    {
-      "id": "R01_ism_inflecting_from_low",
-      "signal": "bullish",
-      "interpretation": {
-        "zh": "ISM 低於 50 但動能回升，符合書中『疲弱但改善』的希望期特徵。",
-        "en": "ISM below 50 with improving momentum; classic hope-phase setup."
-      }
-    },
     {
       "id": "R05_cpi_disinflation",
       "signal": "bullish",
@@ -36,14 +28,21 @@
     }
   ],
   "metricsUsed": {
-    "ism.latest.value": 48.2,
-    "ism_momentum_1m": 0.10000000000000142,
-    "ism_momentum_3m": 0.20000000000000284,
-    "cpi_yoy": 0.7672634271099765,
-    "cpi_momentum_3m": -0.8778978632126178,
-    "return_6m": 0.12,
-    "return_12m": 0.18,
-    "drawdown_from_peak": 0
+    "ism.latest.value": 49.94,
+    "ism_momentum_1m": -0.7100000000000009,
+    "ism_momentum_3m": 0.8200000000000003,
+    "cpi_yoy": 2.2150154045727177,
+    "cpi_momentum_3m": -0.25827501918656015,
+    "pe_percentile_10y": 50,
+    "eps_growth_yoy": 3.992334717342705,
+    "eps_growth_trend": 1,
+    "return_6m": 0.08722080663876786,
+    "return_12m": 0.1608077533515686,
+    "drawdown_from_peak": 0,
+    "unemployment_level": 3.79,
+    "unemployment_rising_from_low": false,
+    "spread_10y_3m": 1.39,
+    "curve_inverted": false
   },
   "crossMatrix": {
     "cell": "ism_rising__cpi_falling",
@@ -55,8 +54,8 @@
   "dataAvailability": {
     "ism": true,
     "cpi": true,
-    "valuation": false,
-    "earnings": false,
+    "valuation": true,
+    "earnings": true,
     "market": true
   },
   "disclaimer": {

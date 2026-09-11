@@ -1,15 +1,15 @@
 {
   "id": "cpi",
-  "updatedAt": "2026-09-11T11:51:58.559Z",
+  "updatedAt": "2026-09-11T15:17:16.071Z",
   "source": "FRED",
   "sourceSeriesId": "CPIAUCSL",
   "unit": "index",
   "frequency": "monthly",
   "latest": {
-    "date": "2026-07-01",
-    "value": 332.813,
-    "yoy": 3.54,
-    "momentum3m": -0.41
+    "date": "2026-08-01",
+    "value": 334.131,
+    "yoy": 3.71,
+    "momentum3m": -0.56
   },
   "history": [
     {
@@ -371,6 +371,10 @@
     {
       "date": "2026-07-01",
       "value": 332.813
+    },
+    {
+      "date": "2026-08-01",
+      "value": 334.131
     }
   ]
 }

@@ -1,13 +1,13 @@
 {
   "id": "vix",
-  "updatedAt": "2026-09-11T11:51:57.234Z",
+  "updatedAt": "2026-09-11T15:17:14.822Z",
   "source": "FRED",
   "sourceSeriesId": "VIXCLS",
   "unit": "index",
   "frequency": "daily",
   "latest": {
-    "date": "2026-09-09",
-    "value": 16.46
+    "date": "2026-09-10",
+    "value": 17.84
   },
   "history": [
     {
@@ -7869,6 +7869,10 @@
     {
       "date": "2026-09-09",
       "value": 16.46
+    },
+    {
+      "date": "2026-09-10",
+      "value": 17.84
     }
   ]
 }

@@ -1,14 +1,14 @@
 {
   "id": "yield_curve",
-  "updatedAt": "2026-09-15T20:29:27.878Z",
+  "updatedAt": "2026-09-15T23:13:10.498Z",
   "source": "FRED",
   "sourceSeriesId": "T10Y3M",
   "unit": "%",
   "frequency": "daily",
   "latest": {
-    "date": "2026-09-14",
-    "value": 0.86,
-    "spread10y3m": 0.86
+    "date": "2026-09-15",
+    "value": 0.89,
+    "spread10y3m": 0.89
   },
   "history": [
     {
@@ -7714,6 +7714,10 @@
     {
       "date": "2026-09-14",
       "value": 0.86
+    },
+    {
+      "date": "2026-09-15",
+      "value": 0.89
     }
   ]
 }

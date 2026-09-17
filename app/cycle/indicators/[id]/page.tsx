@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import TimeSeriesChart from "@/components/charts/TimeSeriesChart";
-import { getCycleFramework, getDisplayHistory } from "@/lib/data";
+import SecondDerivativeSection from "@/components/cycle/SecondDerivativeSection";
+import { getCycleFramework, getCycleAssessment, getDisplayHistory } from "@/lib/data";
 
 const validIds = ["ism", "cpi"];
 
@@ -17,6 +18,7 @@ export default function CycleIndicatorPage({
   if (!validIds.includes(params.id)) notFound();
 
   const framework = getCycleFramework();
+  const assessment = getCycleAssessment();
   const indicator = framework.keyIndicators.find((k) => k.id === params.id);
   if (!indicator) notFound();
 
@@ -45,6 +47,12 @@ export default function CycleIndicatorPage({
           角色：{indicator.role === "growth_momentum" ? "成長動能觀察" : "通膨與政策觀察"}
         </p>
       </header>
+
+      <SecondDerivativeSection
+        assessment={assessment}
+        variant="detail"
+        indicatorId={params.id as "ism" | "cpi"}
+      />
 
       <section className="card">
         <h2 className="mb-4 text-lg font-semibold">數據曲線</h2>
@@ -80,7 +88,8 @@ export default function CycleIndicatorPage({
         )}
         {momentumInterp && (
           <section className="card">
-            <h3 className="font-semibold">動能解讀（二階變化）</h3>
+            <h3 className="font-semibold">書中情境參考</h3>
+            <p className="mt-1 text-xs text-slate-500">與上方即時動能數值對照的靜態解讀</p>
             <ul className="mt-3 space-y-2 text-sm text-slate-300">
               {Object.entries(momentumInterp).map(([key, val]) => (
                 <li key={key}>

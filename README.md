@@ -57,7 +57,9 @@ npm run fetch-ism            # 僅更新 ISM PMI
 1. 從 FRED / DBnomics / Bellwether 抓取資料
 2. 更新 `data/series/*.json`
 3. 重算週期評估與 Dashboard 摘要
-4. Commit 並 push（觸發重新部署）
+4. 若有變更則 commit、push，並在同一 workflow 內 **build + 部署 GitHub Pages**（避免 `GITHUB_TOKEN` push 無法觸發 Deploy workflow）
+
+程式碼合併到 `main` 時仍由 `deploy.yml` 部署。
 
 在 GitHub Secrets 設定：
 

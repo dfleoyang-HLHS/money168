@@ -7,10 +7,18 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      data_changed: ${{ steps.push.outputs.data_changed }}
     steps:
       - uses: actions/checkout@v4
 
@@ -25,9 +33,55 @@ jobs:
         run: node scripts/fetch-and-update.js
 
       - name: Commit and push if changed
+        id: push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --staged --quiet || git commit -m "chore: update market data [automated]"
-          git push
+          if git diff --staged --quiet; then
+            echo "data_changed=false" >> "$GITHUB_OUTPUT"
+            echo "No data changes to commit"
+          else
+            git commit -m "chore: update market data [automated]"
+            git push
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: update
+    if: needs.update.outputs.data_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    if: needs.update.outputs.data_changed == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

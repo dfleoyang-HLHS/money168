@@ -1,5 +1,6 @@
 import CyclePhaseBar from "@/components/cycle/CyclePhaseBar";
 import AssessmentPanel from "@/components/cycle/AssessmentPanel";
+import SecondDerivativeSection from "@/components/cycle/SecondDerivativeSection";
 import CrossMatrix from "@/components/cycle/CrossMatrix";
 import PhaseCard from "@/components/cycle/PhaseCard";
 import HistoryTimeline from "@/components/cycle/HistoryTimeline";
@@ -39,6 +40,8 @@ export default function CycleOverviewPage() {
           activeCell={assessment.crossMatrix?.cell}
         />
       </div>
+
+      <SecondDerivativeSection assessment={assessment} />
 
       <section>
         <div className="mb-4 flex items-center justify-between">

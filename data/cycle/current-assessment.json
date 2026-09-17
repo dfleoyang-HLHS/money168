@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17T01:52:46.291Z",
+  "updatedAt": "2026-09-17T06:17:33.232Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "hope",
@@ -51,6 +51,7 @@
     "ism_acceleration": -2,
     "cpi_yoy": 3.7129581058388483,
     "cpi_momentum_3m": -0.5570745508413966,
+    "cpi_acceleration": -0.14979906933079157,
     "pe_percentile_10y": 50,
     "eps_growth_yoy": 3.992334717342705,
     "eps_growth_trend": 1,

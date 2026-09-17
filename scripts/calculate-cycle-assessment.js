@@ -100,6 +100,20 @@ function buildMetrics() {
     metrics.cpi_yoy = yoyNow;
     metrics.cpi_momentum_3m =
       yoyNow != null && yoy3mAgo != null ? yoyNow - yoy3mAgo : cpi.latest?.momentum3m ?? null;
+
+    const yoy1mLatest = getHistoryValue(history, 1);
+    const yoy1mBase = getHistoryValue(history, 13);
+    const yoy1mAgo = yoy1mLatest != null && yoy1mBase != null ? (yoy1mLatest / yoy1mBase - 1) * 100 : null;
+    const yoy4mLatest = getHistoryValue(history, 4);
+    const yoy4mBase = getHistoryValue(history, 16);
+    const yoy4mAgo =
+      yoy4mLatest != null && yoy4mBase != null ? (yoy4mLatest / yoy4mBase - 1) * 100 : null;
+    const cpiMomentum3mPrev =
+      yoy1mAgo != null && yoy4mAgo != null ? yoy1mAgo - yoy4mAgo : null;
+    metrics.cpi_acceleration =
+      metrics.cpi_momentum_3m != null && cpiMomentum3mPrev != null
+        ? metrics.cpi_momentum_3m - cpiMomentum3mPrev
+        : null;
   }
 
   if (sp500Pe) {

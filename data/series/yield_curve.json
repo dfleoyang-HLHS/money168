@@ -1,6 +1,6 @@
 {
   "id": "yield_curve",
-  "updatedAt": "2026-09-20T07:07:55.589Z",
+  "updatedAt": "2026-09-20T12:39:07.291Z",
   "source": "FRED",
   "sourceSeriesId": "T10Y3M",
   "unit": "%",

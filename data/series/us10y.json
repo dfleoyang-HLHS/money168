@@ -1,13 +1,13 @@
 {
   "id": "us10y",
-  "updatedAt": "2026-09-29T16:41:19.912Z",
+  "updatedAt": "2026-09-29T21:06:36.304Z",
   "source": "FRED",
   "sourceSeriesId": "DGS10",
   "unit": "%",
   "frequency": "daily",
   "latest": {
-    "date": "2026-09-25",
-    "value": 5.17
+    "date": "2026-09-28",
+    "value": 5.24
   },
   "history": [
     {
@@ -7749,6 +7749,10 @@
     {
       "date": "2026-09-25",
       "value": 5.17
+    },
+    {
+      "date": "2026-09-28",
+      "value": 5.24
     }
   ]
 }

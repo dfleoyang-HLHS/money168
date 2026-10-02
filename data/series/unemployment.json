@@ -1,13 +1,13 @@
 {
   "id": "unemployment",
-  "updatedAt": "2026-10-02T09:03:19.225Z",
+  "updatedAt": "2026-10-02T15:59:11.498Z",
   "source": "FRED",
   "sourceSeriesId": "UNRATE",
   "unit": "%",
   "frequency": "monthly",
   "latest": {
-    "date": "2026-08-01",
-    "value": 4.1
+    "date": "2026-09-01",
+    "value": 4.2
   },
   "history": [
     {
@@ -373,6 +373,10 @@
     {
       "date": "2026-08-01",
       "value": 4.1
+    },
+    {
+      "date": "2026-09-01",
+      "value": 4.2
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T22:03:38.211Z",
+  "updatedAt": "2026-10-11T01:21:41.218Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "hope",
@@ -44,11 +44,11 @@
     }
   ],
   "metricsUsed": {
-    "ism.latest.value": 53.3,
-    "ism_momentum_1m": -0.7000000000000028,
-    "ism_momentum_1m_prev": 1.2999999999999972,
-    "ism_momentum_3m": 0.5999999999999943,
-    "ism_acceleration": -2,
+    "ism.latest.value": 54.6,
+    "ism_momentum_1m": -1,
+    "ism_momentum_1m_prev": 2.3000000000000043,
+    "ism_momentum_3m": 0.6000000000000014,
+    "ism_acceleration": -3.3000000000000043,
     "cpi_yoy": 3.7129581058388483,
     "cpi_momentum_3m": -0.5570745508413966,
     "cpi_acceleration": -0.14979906933079157,

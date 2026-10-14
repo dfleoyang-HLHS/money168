@@ -1,32 +1,32 @@
 {
-  "globalUpdatedAt": "2026-10-14T00:40:19.025Z",
+  "globalUpdatedAt": "2026-10-14T05:31:59.340Z",
   "series": {
     "us10y": {
-      "updatedAt": "2026-10-14T00:40:14.418Z",
+      "updatedAt": "2026-10-14T05:31:51.459Z",
       "status": "ok"
     },
     "vix": {
-      "updatedAt": "2026-10-14T00:40:14.999Z",
+      "updatedAt": "2026-10-14T05:31:52.289Z",
       "status": "ok"
     },
     "sp500": {
-      "updatedAt": "2026-10-14T00:40:15.704Z",
+      "updatedAt": "2026-10-14T05:31:52.857Z",
       "status": "ok"
     },
     "cpi": {
-      "updatedAt": "2026-10-14T00:40:16.322Z",
+      "updatedAt": "2026-10-14T05:31:53.513Z",
       "status": "ok"
     },
     "unemployment": {
-      "updatedAt": "2026-10-14T00:40:16.857Z",
+      "updatedAt": "2026-10-14T05:31:54.608Z",
       "status": "ok"
     },
     "yield_curve": {
-      "updatedAt": "2026-10-14T00:40:17.486Z",
+      "updatedAt": "2026-10-14T05:31:56.680Z",
       "status": "ok"
     },
     "ism": {
-      "updatedAt": "2026-10-14T00:40:19.025Z",
+      "updatedAt": "2026-10-14T05:31:59.339Z",
       "status": "ok"
     },
     "sp500_pe": {

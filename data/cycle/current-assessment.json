@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-14T10:40:23.649Z",
+  "updatedAt": "2026-10-14T15:33:39.501Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "hope",
-    "confidence": "medium",
+    "confidence": "low",
     "label": {
       "zh": "希望",
       "en": "hope"
@@ -11,12 +11,12 @@
   },
   "secondaryPhases": [],
   "scores": {
-    "despair": 5,
-    "hope": 55,
-    "growth": 30,
-    "optimism": 15
+    "despair": 27,
+    "hope": 32,
+    "growth": 20,
+    "optimism": 20
   },
-  "scoreGap": 25,
+  "scoreGap": 5,
   "matchedRules": [
     {
       "id": "R24_ism_inflection_down",
@@ -35,11 +35,11 @@
       }
     },
     {
-      "id": "R05_cpi_disinflation",
-      "signal": "bullish",
+      "id": "R07_cpi_elevated",
+      "signal": "caution",
       "interpretation": {
-        "zh": "通膨趨勢回落，有利政策轉向與估值修復。",
-        "en": "Disinflation supports policy pivot and valuation repair."
+        "zh": "通膨偏高，歷史上常伴隨政策緊縮與估值壓力。",
+        "en": "Elevated inflation historically coincides with tightening and valuation pressure."
       }
     }
   ],
@@ -49,9 +49,9 @@
     "ism_momentum_1m_prev": 2.3000000000000043,
     "ism_momentum_3m": 0.6000000000000014,
     "ism_acceleration": -3.3000000000000043,
-    "cpi_yoy": 3.7129581058388483,
-    "cpi_momentum_3m": -0.5570745508413966,
-    "cpi_acceleration": -0.14979906933079157,
+    "cpi_yoy": 4.023310268457836,
+    "cpi_momentum_3m": 0.2967804200391555,
+    "cpi_acceleration": 0.8538549708805521,
     "pe_percentile_10y": 50,
     "eps_growth_yoy": 3.992334717342705,
     "eps_growth_trend": 1,
@@ -64,10 +64,9 @@
     "curve_inverted": false
   },
   "crossMatrix": {
-    "cell": "ism_falling__cpi_falling",
+    "cell": "ism_falling__cpi_rising",
     "bonusApplied": {
-      "despair": 5,
-      "hope": 8
+      "despair": 12
     }
   },
   "dataAvailability": {

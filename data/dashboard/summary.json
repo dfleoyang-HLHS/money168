@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T10:40:23.663Z",
+  "updatedAt": "2026-10-14T15:33:39.517Z",
   "indicators": [
     {
       "id": "us10y",
@@ -38,25 +38,25 @@
       },
       "category": "risk_sentiment",
       "latest": {
-        "value": 15.21,
+        "value": 15.27,
         "unit": "index",
-        "asOf": "2026-10-12"
+        "asOf": "2026-10-13"
       },
       "change": {
         "1d": null,
         "1w": 0,
-        "1m": 0.02493261455525613
+        "1m": 0.003944773175542322
       },
-      "trend": "up",
+      "trend": "flat",
       "sparkline": [
-        16.39,
         15.31,
         15.52,
         15.01,
         15.08,
         15.41,
         14.84,
-        15.21
+        15.21,
+        15.27
       ]
     },
     {
@@ -96,25 +96,25 @@
       },
       "category": "inflation",
       "latest": {
-        "value": 3.71,
+        "value": 4.02,
         "unit": "%",
-        "asOf": "2026-08-01"
+        "asOf": "2026-09-01"
       },
       "change": {
         "1d": null,
         "1w": 0,
-        "1m": 0.0039601818438582135
+        "1m": 0.006485480245771958
       },
-      "trend": "flat",
+      "trend": "up",
       "sparkline": [
-        326.588,
         327.46,
         330.293,
         332.407,
         333.979,
         332.568,
         332.813,
-        334.131
+        334.131,
+        336.298
       ]
     },
     {
@@ -179,6 +179,6 @@
   "cycle": {
     "estimatedPhase": "hope",
     "phaseLabel": "希望",
-    "confidence": "medium"
+    "confidence": "low"
   }
 }

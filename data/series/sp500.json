@@ -1,6 +1,6 @@
 {
   "id": "sp500",
-  "updatedAt": "2026-10-15T10:23:50.425Z",
+  "updatedAt": "2026-10-15T15:21:18.139Z",
   "source": "FRED",
   "sourceSeriesId": "SP500",
   "unit": "index",

@@ -1,5 +1,5 @@
 {
-  "globalUpdatedAt": "2026-10-21T19:41:39.986Z",
+  "globalUpdatedAt": "2026-10-21T22:49:07.956Z",
   "series": {
     "us10y": {
       "updatedAt": "2026-10-21T10:39:10.084Z",
@@ -26,7 +26,7 @@
       "status": "ok"
     },
     "ism": {
-      "updatedAt": "2026-10-21T19:41:39.984Z",
+      "updatedAt": "2026-10-21T22:49:07.955Z",
       "status": "ok"
     },
     "sp500_pe": {

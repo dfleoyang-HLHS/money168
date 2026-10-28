@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T19:09:53.085Z",
+  "updatedAt": "2026-10-28T23:39:46.890Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "hope",
@@ -60,7 +60,7 @@
     "drawdown_from_peak": -0.012320100064842632,
     "unemployment_level": 4.2,
     "unemployment_rising_from_low": false,
-    "spread_10y_3m": 0.77,
+    "spread_10y_3m": 0.87,
     "curve_inverted": false
   },
   "crossMatrix": {

@@ -1,16 +1,16 @@
 {
   "id": "sp500",
-  "updatedAt": "2026-10-30T14:36:44.890Z",
+  "updatedAt": "2026-10-30T19:44:47.957Z",
   "source": "FRED",
   "sourceSeriesId": "SP500",
   "unit": "index",
   "frequency": "daily",
   "latest": {
-    "date": "2026-10-28",
-    "value": 7743.98,
-    "return6m": 0.004072572436943922,
-    "return12m": -0.008102735409696638,
-    "drawdownFromPeak": -0.009585710576766937
+    "date": "2026-10-29",
+    "value": 7720.39,
+    "return6m": -0.0047414198734847535,
+    "return12m": -0.010897513916558244,
+    "drawdownFromPeak": -0.012602747434751316
   },
   "history": [
     {
@@ -7880,6 +7880,10 @@
     {
       "date": "2026-10-28",
       "value": 7743.98
+    },
+    {
+      "date": "2026-10-29",
+      "value": 7720.39
     }
   ]
 }

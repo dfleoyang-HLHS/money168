@@ -1,20 +1,22 @@
 {
-  "updatedAt": "2026-11-10T07:48:56.553Z",
+  "updatedAt": "2026-11-10T15:50:39.004Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
-    "id": "hope",
+    "id": "despair",
     "confidence": "low",
     "label": {
-      "zh": "希望",
-      "en": "hope"
+      "zh": "絕望 → 希望 過渡期",
+      "en": "despair → hope"
     }
   },
-  "secondaryPhases": [],
+  "secondaryPhases": [
+    "hope"
+  ],
   "scores": {
-    "despair": 27,
+    "despair": 37,
     "hope": 32,
     "growth": 20,
-    "optimism": 20
+    "optimism": 30
   },
   "scoreGap": 5,
   "matchedRules": [
@@ -35,6 +37,14 @@
       }
     },
     {
+      "id": "R06_cpi_reacceleration",
+      "signal": "caution",
+      "interpretation": {
+        "zh": "通膨黏性上升，提高緊縮與波動風險。",
+        "en": "Sticky/reaccelerating inflation raises tightening risk."
+      }
+    },
+    {
       "id": "R07_cpi_elevated",
       "signal": "caution",
       "interpretation": {
@@ -49,9 +59,9 @@
     "ism_momentum_1m_prev": 2.3000000000000043,
     "ism_momentum_3m": 0.6000000000000014,
     "ism_acceleration": -3.3000000000000043,
-    "cpi_yoy": 4.023310268457836,
-    "cpi_momentum_3m": 0.2967804200391555,
-    "cpi_acceleration": 0.8538549708805521,
+    "cpi_yoy": 4.080556369412025,
+    "cpi_momentum_3m": 0.5408049422183536,
+    "cpi_acceleration": 0.24402452217919812,
     "pe_percentile_10y": 50,
     "eps_growth_yoy": 3.992334717342705,
     "eps_growth_trend": 1,

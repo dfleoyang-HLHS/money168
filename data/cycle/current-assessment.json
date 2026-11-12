@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T13:20:14.071Z",
+  "updatedAt": "2026-11-12T21:09:48.708Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "despair",
@@ -65,9 +65,9 @@
     "pe_percentile_10y": 50,
     "eps_growth_yoy": 3.992334717342705,
     "eps_growth_trend": 1,
-    "return_6m": -0.0027143501206671194,
-    "return_12m": -0.013477743032236367,
-    "drawdown_from_peak": -0.037202651461811564,
+    "return_6m": 0.006666737130264222,
+    "return_12m": -0.00747580036916573,
+    "drawdown_from_peak": -0.024599502786902483,
     "unemployment_level": 4.1,
     "unemployment_rising_from_low": false,
     "spread_10y_3m": 0.68,

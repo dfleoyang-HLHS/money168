@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T07:23:11.447Z",
+  "updatedAt": "2026-11-16T17:31:25.017Z",
   "indicators": [
     {
       "id": "us10y",
@@ -38,25 +38,25 @@
       },
       "category": "risk_sentiment",
       "latest": {
-        "value": 18.7,
+        "value": 19.3,
         "unit": "index",
-        "asOf": "2026-11-12"
+        "asOf": "2026-11-13"
       },
       "change": {
         "1d": null,
         "1w": 0,
-        "1m": 0.06918238993710697
+        "1m": 0.03208556149732628
       },
       "trend": "up",
       "sparkline": [
-        20.83,
         16.61,
         28.18,
         25.64,
         19.92,
         19.46,
         17.49,
-        18.7
+        18.7,
+        19.3
       ]
     },
     {
@@ -125,25 +125,25 @@
       },
       "category": "manufacturing",
       "latest": {
-        "value": 54.6,
+        "value": 54.5,
         "unit": "index",
-        "asOf": "2026-08-01"
+        "asOf": "2026-09-01"
       },
       "change": {
         "1d": null,
         "1w": 0,
-        "1m": -0.017985611510791366
+        "1m": -0.0018315018315018575
       },
-      "trend": "down",
+      "trend": "flat",
       "sparkline": [
-        52.6,
         52.4,
         52.7,
         52.7,
         54,
         53.3,
         55.6,
-        54.6
+        54.6,
+        54.5
       ]
     },
     {
@@ -178,7 +178,7 @@
   ],
   "cycle": {
     "estimatedPhase": "despair",
-    "phaseLabel": "絕望 → 希望 過渡期",
-    "confidence": "low"
+    "phaseLabel": "絕望",
+    "confidence": "medium"
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "ism",
-  "updatedAt": "2026-11-16T07:23:11.405Z",
+  "updatedAt": "2026-11-16T17:31:24.995Z",
   "source": "ISM via DBnomics + Bellwether historical",
   "sourceProvider": "Institute for Supply Management",
   "sourceUrls": [
@@ -11,10 +11,10 @@
   "unit": "index",
   "frequency": "monthly",
   "latest": {
-    "date": "2026-08-01",
-    "value": 54.6,
-    "momentum1m": -1,
-    "momentum3m": 0.6
+    "date": "2026-09-01",
+    "value": 54.5,
+    "momentum1m": -0.1,
+    "momentum3m": 1.2
   },
   "history": [
     {
@@ -3536,6 +3536,10 @@
     {
       "date": "2026-08-01",
       "value": 54.6
+    },
+    {
+      "date": "2026-09-01",
+      "value": 54.5
     }
   ],
   "meta": {
@@ -3544,10 +3548,10 @@
       "bellwether-historical",
       "bellwether-wayback"
     ],
-    "pointCount": 880,
+    "pointCount": 881,
     "range": {
       "from": "1948-01-01",
-      "to": "2026-08-01"
+      "to": "2026-09-01"
     },
     "note": "PMI > 50 = expansion, < 50 = contraction. 50 is neutral."
   }

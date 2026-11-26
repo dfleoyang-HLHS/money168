@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T16:12:10.777Z",
+  "updatedAt": "2026-11-26T00:43:34.907Z",
   "ruleSetId": "oppenheimer_cycle_v2",
   "estimatedPhase": {
     "id": "despair",
@@ -60,7 +60,7 @@
     "drawdown_from_peak": -0.07010477816316663,
     "unemployment_level": 4.1,
     "unemployment_rising_from_low": false,
-    "spread_10y_3m": 0.55,
+    "spread_10y_3m": 0.51,
     "curve_inverted": false
   },
   "crossMatrix": {
